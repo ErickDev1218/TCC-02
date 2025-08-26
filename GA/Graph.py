@@ -34,3 +34,6 @@ class Graph:
 
     def get_labels(self):
         return {node.value: node.label for node in self.nodes}
+    
+    def get_dominated_status(self):
+        return {node.value: node.dominated for node in self.nodes}

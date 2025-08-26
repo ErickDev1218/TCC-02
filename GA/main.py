@@ -1,17 +1,18 @@
 from Graph import Graph
-
+from PRD import PRD
 
 def main():
 
-    Nodes = ['A', 'B', 'C', 'D', 'E',]
-    Edges = [('A', 'B'), ('A', 'C'), ('B', 'D'), ('C', 'D'), ('D', 'E')]
+    Nodes = [0,1,2,3,4]
+    Edges = [(0, 4), (0, 2), (1, 2), (2, 3)]
 
     g = Graph(Nodes, Edges)
-    
-    g.print_graph()
-    g.label_nodes()
+
+    PRD(g)
     labels = g.get_labels()
-    print("Node Labels:", labels)
+    print("Node Labels after Roman Perfect Domination:", labels)
+    dominates = g.get_dominated_status()
+    print("Node Dominated Status:", dominates)
 
 
 
