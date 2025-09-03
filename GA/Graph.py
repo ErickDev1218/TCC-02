@@ -2,7 +2,7 @@ from Node import Node
 
 class Graph:
 
-    def __init__(self, nodes=[], edges=[]):
+    def __init__(self, nodes=[], edges=[], labels = None):
         self.nodes = [Node(n) for n in nodes]
         self.edges = edges
         for edge in edges:
@@ -11,18 +11,26 @@ class Graph:
             if node1 and node2:
                 node1.edges.append(edge)
                 node2.edges.append(edge)
+        if labels:
+            for node in self.nodes:
+                if node.value in labels:
+                    node.label = labels[node.value]
 
     def print_graph(self):
         for node in self.nodes:
             print(f'Node {node.value} has edges: {node.edges}')
 
-    def label_nodes(self):
-        label = 0
-        for node in self.nodes:
-            if node.label == -1:
-                node.label = label
-                label += 1
-                self._label_connected_nodes(node, label)
+    def label_nodes(self, labels):
+        for i,label in enumerate(labels):
+            self.nodes[i].label = label
+            self.nodes[i].dominated = True
+
+        # print({node.value: node.label for node in self.nodes})        
+        # for node in self.nodes:
+        #     if node.label == -1:
+        #         node.label = label
+        #         label += 1
+        #         self._label_connected_nodes(node, label)
 
     def _label_connected_nodes(self, node, label):
         for edge in node.edges:
@@ -37,3 +45,9 @@ class Graph:
     
     def get_dominated_status(self):
         return {node.value: node.dominated for node in self.nodes}
+    
+    def reset_labels_and_dominance(self):
+        for node in self.nodes:
+            node.label = -1
+            node.dominated = False
+    

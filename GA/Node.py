@@ -1,7 +1,7 @@
 class Node:
 
-    def __init__(self, id):
+    def __init__(self, id, label = -1):
         self.value = id
         self.edges = []
-        self.label = -1
+        self.label = label 
         self.dominated = False
