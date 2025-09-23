@@ -1,4 +1,5 @@
 from typing import List, Tuple
+from PRD import PRD
 import numpy as np
 
 class GA:
@@ -11,13 +12,40 @@ class GA:
         self.graph = graph
         self.config = config
         self.population = None
+        self.prd = PRD(graph)
+        self.current_fitness = np.full(population_size + 1, -1)
+        self.initialize_population()
+       
+
+    def calculate_fitness(self, individual: np.ndarray) -> float:
+        return sum(individual) + (0 if self.prd.check_prd_v2(individual) else len(individual) * 5)  # Penalidade para soluções inválidas
 
     def initialize_population(self):
-        self.population = np.random.randint(2, size=(self.population_size, len(self.graph.nodes)))
+        self.population = self.prd.randomized_initialization(self.population_size)
+        self.population = np.vstack([self.population, self.prd.degree_based_initialization()])
+        valid_mask = self.prd.check_prd_v3(self.population)  # hipotético: retorna array booleano
+        penalty = np.where(valid_mask, 0, self.population.shape[1] * 5)
+        self.current_fitness = np.sum(self.population, axis=1) + penalty
+        
 
-    def selection(self):
+    def __tournament_selection(self):
         # Implement selection logic using NumPy
-        pass
+        n = self.population.shape[0]
+        pairs = []
+        for _ in range(n // 2):
+            # Seleciona o primeiro indivíduo do par
+            idxs1 = np.random.choice(n, 3, replace=False)
+            winner1_idx = idxs1[np.argmin(self.current_fitness[idxs1])]
+            
+            # Seleciona o segundo indivíduo do par, garantindo que seja diferente do primeiro
+            while True:
+                idxs2 = np.random.choice(n, 3, replace=False)
+                winner2_idx = idxs2[np.argmin(self.current_fitness[idxs2])]
+                if winner2_idx != winner1_idx:
+                    break
+            
+            pairs.append((self.population[winner1_idx], self.population[winner2_idx]))
+        return np.array(pairs)
 
     def crossover(self, parent1: np.ndarray, parent2: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
         if np.random.rand() < self.crossover_rate:
@@ -34,17 +62,28 @@ class GA:
         return individual
 
     def ga_flow(self):
-        self.initialize_population()
-        for generation in range(self.generations):
-            # Selection
-            selected = self.selection()
-            # Crossover and Mutation
-            new_population = []
-            for i in range(0, len(selected), 2):
-                parent1 = selected[i]
-                parent2 = selected[i + 1] if i + 1 < len(selected) else selected[0]
-                child1, child2 = self.crossover(parent1, parent2)
-                new_population.append(self.mutate(child1))
-                new_population.append(self.mutate(child2))
-            self.population = np.array(new_population)[:self.population_size]  # Ensure population size remains constant
-            # Additional logic for evaluating fitness and elitism can be added here
+        # print('check', self.prd.check_prd_v3(self.population))
+        # valid_mask = self.prd.check_prd_v3(self.population)  # hipotético: retorna array booleano
+        # penalty = np.where(valid_mask, 0, self.population.shape[1] * 5)
+        # self.current_fitness = np.sum(self.population, axis=1) + penalty
+        # self.current_fitness = [self.calculate_fitness(ind) for ind in self.population]
+        # self.current_fitness = np.sum(self.population, axis=1)
+        # self.current_fitness = np.array([
+        #     np.sum(ind) + (0 if self.prd.check_prd_v2(ind) else len(ind) * 5)
+        #     for ind in self.population
+        # ])
+        print('population', self.population)
+        print('actual fitness', self.current_fitness)
+        # for generation in range(self.generations):
+        #     # Selection
+        #     selected = self.selection()
+        #     # Crossover and Mutation
+        #     new_population = []
+        #     for i in range(0, len(selected), 2):
+        #         parent1 = selected[i]
+        #         parent2 = selected[i + 1] if i + 1 < len(selected) else selected[0]
+        #         child1, child2 = self.crossover(parent1, parent2)
+        #         new_population.append(self.mutate(child1))
+        #         new_population.append(self.mutate(child2))
+        for _ in range(self.generations):
+            return

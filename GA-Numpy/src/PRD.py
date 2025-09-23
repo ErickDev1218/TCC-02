@@ -114,7 +114,7 @@ class PRD:
             else:
                 if labels[v] == -1:
                     labels[v] = 0
-
+        
         return labels
     
 
@@ -149,3 +149,23 @@ class PRD:
             return False
 
         return True
+    
+    def check_prd_v3(self, solutions_2d):
+        adjacency = self.graph.adjacency_matrix
+        solutions_2d = np.asarray(solutions_2d)
+        results = []
+
+        for solution in solutions_2d:
+            count_neighbors_2 = adjacency @ (solution == 2)
+            zero_vertices = solution == 0
+            if not np.all(count_neighbors_2[zero_vertices] == 1):
+                results.append(False)
+                continue
+
+            dominated = (solution == 1) | (solution == 2) | (count_neighbors_2 > 0)
+            if not np.all(dominated):
+                results.append(False)
+                continue
+
+            results.append(True)
+        return np.array(results)
