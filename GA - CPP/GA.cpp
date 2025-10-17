@@ -76,10 +76,9 @@ std::vector<std::pair<Solution*, Solution*>> GeneticAlgorithm::tournamentSelecti
         // Embaralha o vetor
         std::shuffle(auxiliary.begin(), auxiliary.end(), gen);
     
-        // Pega os 4 primeiros -> CONVERSAR SOBRE ISSO COM ATILIO
-        Solution* first = GeneticAlgorithm::findMinimal(auxiliary, 4);
+        Solution* first = GeneticAlgorithm::findMinimal(auxiliary, this->tournamentSize);
         
-        Solution* second = GeneticAlgorithm::findMinimal(auxiliary, 4);
+        Solution* second = GeneticAlgorithm::findMinimal(auxiliary, this->tournamentSize);
         
     
         selectedPairs.push_back(std::make_pair(first, second));
