@@ -234,7 +234,7 @@ void PRD::restartGraph() {
     }
 }
 
-void PRD::fixSolution(Solution* s){
+Solution* PRD::fixSolution(Solution* s){
     this->restartGraph(); // Coloca o grafo em estado inicial
 
     // Rotule o grafo
@@ -255,7 +255,109 @@ void PRD::fixSolution(Solution* s){
     }
     // Acredito que nesse ponto o grafo estara rotulado e 
     // os vertices 0 que tem mais de um vizinho com rotulo 2
-    // tem dominanceNumber.size() >= 2
-    std::vector<Node*> zeroNodes;
-    // Olhe todos os vértices com f(v) == 0
+    // tem dominanceNumber.size() >= 2 -> trocar dominanceNumber por um int depois
+    std::vector<Node*> zeroNodesWithProblems;
+    
+    // Olhe todos os vértices com f(v) == 0 e com dominanceNumber >= 2 ou nao dominados
+    for(Node* u : this->graph->nodes){
+        if(u->label == 0 && (u->dominanceNumber.size() >= 2 || !u->isDominated)){
+            zeroNodesWithProblems.push_back(u);
+        }
+    }
+    
+    // Aqui temos duas situacoes para nao ser um PRD
+    for(Node* u : zeroNodesWithProblems){
+        // Caso 1: nao ha vizinho com rotulo 2 e u está desprotegido.
+        if(u->isDominated == false){
+            // Olhar a vizinhança completa de u
+            bool canBeTwo = true;
+            std::vector<Node*> aux;
+            for(Node* v : u->neighborhood){
+                aux.push_back(v);
+                // Se houver um vizinho 0 sem estar protegido, talvez u precise ser 2
+                if(v->isDominated == true){
+                    canBeTwo = false;
+                }
+            }
+            if(canBeTwo){
+                u->label = 2;
+                u->isDominated = true;
+                u->dominanceNumber.push_back(true);
+                
+                for(Node * x : aux){
+                    x->isDominated = true;
+                    x->dominanceNumber.push_back(true); // !!! Alterar depois !!!
+                }
+                
+            } else {
+                u->label = 1;
+                u->isDominated = true;
+                u->dominanceNumber.push_back(true); 
+            }
+        }
+        // Caso 2: u esta dominado por mais de um vizinho com rotulo 2
+        else if(u->dominanceNumber.size() >= 2){
+            // Descubra quem sao os vizinhos de u com rotulo 2
+            std::vector<Node*> labelEqualsTwo;
+            for(Node* v : u->neighborhood){
+                if(v->label == 2){
+                    labelEqualsTwo.push_back(v);
+                }
+            }
+            // Para os vertices com rotulos 2, descubra quem tem menor grau
+            Node* minDegree = labelEqualsTwo[0];
+            for(int i = 1; i < labelEqualsTwo.size(); i++){
+                if(minDegree->neighborhood.size() > labelEqualsTwo[i]->neighborhood.size()){
+                    minDegree = labelEqualsTwo[i];
+                }
+            }
+
+            // Descobrir quem eh o vertice de menor grau eh importante
+            // pois provavelmente re-rotular ele seja mais simples
+
+            // Casos que prevejo:
+            
+            // Caso 1: todos os seus vizinhos ja estao dominados por outro vertice
+            // entao esse vertice precisa ser 1 ou 0 (ele pode ter um vizinho 2, dado
+            // que ter 2----2 nao eh problema aqui)
+
+            // Caso 2: acho que o caso acima eh suficiente
+
+            // Primeiro passo: conhecer a vizinha desse vertice ja com algumas inferencias
+            bool canBeZero = true;
+            bool needToBeOne = false;
+            int howManyTwo = 0;
+            int howManyDefenseless = 0;
+            
+            for(Node* v : minDegree->neighborhood){
+                if(v->label == 2){
+                    howManyTwo++;
+                }
+                if(v->isDominated == false){
+                   howManyDefenseless++;
+                }
+            }
+
+            if(howManyTwo == 1 && howManyDefenseless == 0){
+                minDegree->label = 0;
+                minDegree->dominanceNumber.pop_back(); // Remover 1 da contagem
+                minDegree->isDominated = true; // Talvez ja estivesse com true, mas garanto aqui
+                
+            }else if(howManyTwo > 1 || howManyTwo < 1){
+                minDegree->label = 1;
+                minDegree->isDominated = true;
+            
+            }
+        }
+    }
+
+    // Agora com a solucao corrigida, deleta a passada e retorna uma nova
+    delete s;
+    std::vector<int> n;
+    n.reserve(this->graph->numNodes);
+    for(Node* u : this->graph->nodes){
+        n.push_back(u->label);
+    }
+    return new Solution(n, this);
 }
+
