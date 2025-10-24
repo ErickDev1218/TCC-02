@@ -230,5 +230,32 @@ void PRD::restartGraph() {
     for(int i = 0; i < this->graph->numNodes; i++){
         this->graph->nodes[i]->label = -1;
         this->graph->nodes[i]->isDominated = false;
+        this->graph->nodes[i]->dominanceNumber.clear();
     }
+}
+
+void PRD::fixSolution(Solution* s){
+    this->restartGraph(); // Coloca o grafo em estado inicial
+
+    // Rotule o grafo
+    for(int i = 0; i < this->graph->numNodes; i++){
+        this->graph->nodes[i]->label = s->solution[i];
+        if(s->solution[i] == 1){
+            this->graph->nodes[i]->isDominated = true; // Ele se domina
+            // Nao vou dar um push_back no dominanceNumber pois esse campo é usado para f(v) == 0
+        }else if(s->solution[i] == 2){
+            this->graph->nodes[i]->isDominated = true;
+            // Para f(v) == 2 eh necessario marcar os vizinhos 0 como dominados e dar um push_back
+            // no dominanceNumber
+            for(Node* u : this->graph->nodes[i]->neighborhood){
+                u->isDominated = true;
+                u->dominanceNumber.push_back(true);
+            }
+        }
+    }
+    // Acredito que nesse ponto o grafo estara rotulado e 
+    // os vertices 0 que tem mais de um vizinho com rotulo 2
+    // tem dominanceNumber.size() >= 2
+    std::vector<Node*> zeroNodes;
+    // Olhe todos os vértices com f(v) == 0
 }
