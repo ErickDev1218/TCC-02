@@ -28,7 +28,9 @@ class PRD {
 
     private:
         void restartGraph();
+        void fixSolution();
 };
+
 
 
 
