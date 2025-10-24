@@ -28,10 +28,11 @@ class PRD {
 
     private:
         void restartGraph();
-        void fixSolution();
+        void fixSolution(Solution* s);
 };
 
 
 
 
 #endif
+
