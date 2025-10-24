@@ -8,10 +8,12 @@ class Node {
         int label = -1;
         bool isDominated = false;
         std::vector<Node*> neighborhood;
+        std::vector<bool> dominanceNumber;
 
         Node() = default;
         ~Node() = default;
 
 };
+
 
 #endif
