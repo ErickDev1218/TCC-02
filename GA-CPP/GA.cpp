@@ -7,7 +7,7 @@
 #include <iostream> 
 
 GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int stagnant,float mutRate, float eleSize, float crosRate, int maxGenerations) {
-
+    std::cout << "aqui";
     this->mutationRate = mutRate;
     this->populationSize = g->numNodes / popFactor;
     this->elitismSize = static_cast<std::size_t>(std::floor(this->populationSize * eleSize));
@@ -32,7 +32,7 @@ void GeneticAlgorithm::gaFlow() {
         if(gen >= this->maxStagnant) break; 
 
         std::cout << "Geracao " << i+1 << std::endl;
-        // GeneticAlgorithm::printSolutions(currentPop);
+        GeneticAlgorithm::printSolutions(currentPop);
         std::cout << std::endl;
         // Selection
         std::vector<std::pair<Solution*, Solution*>> select = GeneticAlgorithm::tournamentSelection(currentPop);
@@ -47,9 +47,13 @@ void GeneticAlgorithm::gaFlow() {
         GeneticAlgorithm::printSingleSolution(&best);
         // Elitism
         currentPop = GeneticAlgorithm::defaultElitism(currentPop, newPop);
-
+        for(int i = 0; i < currentPop.size(); i++){
+            if(!currentPop[i]->isValid){
+                std::cout << "entrei" << std::endl;
+                currentPop[i] = this->prd->fixSolution(currentPop[i]);
+            }
+        }
         if(*currentPop[0] < best) {
-
             std::cout << "Trocado por " << std::endl;
             GeneticAlgorithm::printSingleSolution(currentPop[0]);
             best = Solution(currentPop[0]->solution, this->prd);
@@ -189,6 +193,10 @@ std::vector<Solution*> GeneticAlgorithm::defaultElitism(std::vector<Solution*>& 
     return result;
 }
 
+void GeneticAlgorithm::injectSolution(std::vector<int> s){
+    this->population.pop_back();
+    this->population.push_back(new Solution(s, this->prd));
+}
 
 // Auxiliary functions
 
@@ -214,7 +222,7 @@ Solution* GeneticAlgorithm::fixElement(Solution* element){
 std::vector<Solution*> GeneticAlgorithm::initializePopulation(){
     
     std::vector<Solution*> aux = this->prd->randomized_initialization();
-    // aux.push_back(this->prd->greedy_initialization());
+    aux.push_back(this->prd->greedy_initialization());
     
     for(int i = aux.size(); i < this->populationSize; i++){
         aux.push_back(this->prd->random_solution());

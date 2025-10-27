@@ -25,10 +25,10 @@ class PRD {
         
         
         bool check_prd(Solution* sol);
-
+        
+        Solution* fixSolution(Solution* s);
     private:
         void restartGraph();
-        void fixSolution(Solution* s);
 };
 
 

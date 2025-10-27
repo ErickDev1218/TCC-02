@@ -242,9 +242,12 @@ Solution* PRD::fixSolution(Solution* s){
         this->graph->nodes[i]->label = s->solution[i];
         if(s->solution[i] == 1){
             this->graph->nodes[i]->isDominated = true; // Ele se domina
+            this->graph->nodes[i]->dominanceNumber.push_back(true); // Adiciona +1 no numero de dominacao
+            this->graph->nodes[i]->dominanceNumber.push_back(true); // Adicionado depois
             // Nao vou dar um push_back no dominanceNumber pois esse campo é usado para f(v) == 0
         }else if(s->solution[i] == 2){
             this->graph->nodes[i]->isDominated = true;
+            this->graph->nodes[i]->dominanceNumber.push_back(true); // Adiciona +1 no numero de dominacao
             // Para f(v) == 2 eh necessario marcar os vizinhos 0 como dominados e dar um push_back
             // no dominanceNumber
             for(Node* u : this->graph->nodes[i]->neighborhood){
@@ -264,7 +267,9 @@ Solution* PRD::fixSolution(Solution* s){
             zeroNodesWithProblems.push_back(u);
         }
     }
-    
+
+    // A e I
+
     // Aqui temos duas situacoes para nao ser um PRD
     for(Node* u : zeroNodesWithProblems){
         // Caso 1: nao ha vizinho com rotulo 2 e u está desprotegido.
@@ -299,54 +304,90 @@ Solution* PRD::fixSolution(Solution* s){
         else if(u->dominanceNumber.size() >= 2){
             // Descubra quem sao os vizinhos de u com rotulo 2
             std::vector<Node*> labelEqualsTwo;
-            for(Node* v : u->neighborhood){
-                if(v->label == 2){
-                    labelEqualsTwo.push_back(v);
+
+            for(int i = 0; i < u->neighborhood.size(); i++){
+                if(u->neighborhood[i]->label == 2){
+                    labelEqualsTwo.push_back(u->neighborhood[i]);
                 }
             }
-            // Para os vertices com rotulos 2, descubra quem tem menor grau
-            Node* minDegree = labelEqualsTwo[0];
-            for(int i = 1; i < labelEqualsTwo.size(); i++){
-                if(minDegree->neighborhood.size() > labelEqualsTwo[i]->neighborhood.size()){
-                    minDegree = labelEqualsTwo[i];
-                }
-            }
+            while(!labelEqualsTwo.empty() || u->dominanceNumber.size() == 1){
+                // Para os vertices com rotulos 2, descubra quem tem menor grau
+                // Ordena pelo tamanho do neighborhood
+                std::sort(labelEqualsTwo.begin(), labelEqualsTwo.end(), [](Node* a, Node* b) {
+                    return a->neighborhood.size() < b->neighborhood.size();
+                });
+                Node* minDegree = labelEqualsTwo[0];
 
-            // Descobrir quem eh o vertice de menor grau eh importante
-            // pois provavelmente re-rotular ele seja mais simples
+                // std::cout << " index: " << minDegree << std::endl;
+                // int indexMinDegree = 0;
+                // for(int i = 1; i < labelEqualsTwo.size(); i++){
+                //     if(minDegree->neighborhood.size() > labelEqualsTwo[i]->neighborhood.size()){
+                //         minDegree = labelEqualsTwo[i];
+                //         indexMinDegree = i;
+                //         std::cout << "i: " << i << " index: " << indexMinDegree << std::endl;
+                //     }
+                // }
 
-            // Casos que prevejo:
-            
-            // Caso 1: todos os seus vizinhos ja estao dominados por outro vertice
-            // entao esse vertice precisa ser 1 ou 0 (ele pode ter um vizinho 2, dado
-            // que ter 2----2 nao eh problema aqui)
 
-            // Caso 2: acho que o caso acima eh suficiente
+                // Descobrir quem eh o vertice de menor grau eh importante
+                // pois provavelmente re-rotular ele seja mais simples
 
-            // Primeiro passo: conhecer a vizinha desse vertice ja com algumas inferencias
-            bool canBeZero = true;
-            bool needToBeOne = false;
-            int howManyTwo = 0;
-            int howManyDefenseless = 0;
-            
-            for(Node* v : minDegree->neighborhood){
-                if(v->label == 2){
-                    howManyTwo++;
-                }
-                if(v->isDominated == false){
-                   howManyDefenseless++;
-                }
-            }
-
-            if(howManyTwo == 1 && howManyDefenseless == 0){
-                minDegree->label = 0;
-                minDegree->dominanceNumber.pop_back(); // Remover 1 da contagem
-                minDegree->isDominated = true; // Talvez ja estivesse com true, mas garanto aqui
+                // Casos que prevejo:
                 
-            }else if(howManyTwo > 1 || howManyTwo < 1){
-                minDegree->label = 1;
-                minDegree->isDominated = true;
-            
+                // Caso 1: todos os seus vizinhos ja estao dominados por outro vertice
+                // entao esse vertice precisa ser 1 ou 0 (ele pode ter um vizinho 2, dado
+                // que ter 2----2 nao eh problema aqui)
+
+                // Caso 2: acho que o caso acima eh suficiente
+
+                // Primeiro passo: conhecer a vizinhaca desse vertice ja com algumas inferencias
+                bool canBeZero = minDegree->dominanceNumber.size() > 1 ? true : false;
+                bool needToBeOne = false;
+                bool needToBeTwo = false;
+                int howManyTwo = 0;
+                int howManyDefenseless = 0;
+                
+                for(Node* v : minDegree->neighborhood){
+                    if(v->label == 2){
+                        howManyTwo++;
+                        if(howManyTwo >= 2){
+                            canBeZero = false;
+                            needToBeOne = true;
+                        }
+                    }
+                    if(v->isDominated == false){
+                        howManyDefenseless++;
+                    }
+                    
+                    // Verifica se v esta sendo dominado por u
+                    // neste caso, u nao pode ser diferente de 2
+                    if(v->label == 0 && v->dominanceNumber.size() == 1){
+                        needToBeTwo = true;
+                    }
+                }
+
+                if(needToBeTwo){
+                    // Apenas removo da lista para manter o while finito -> eh feito no final sempre
+                    // labelEqualsTwo.erase(labelEqualsTwo.begin() + indexMinDegree); 
+                }else if(howManyTwo == 1 && howManyDefenseless == 0 && canBeZero){
+                    // Tem apenas um vizinho com rotulo 1 e não tem nenhum vizinho desprotegido
+                    minDegree->label = 0;
+                    minDegree->dominanceNumber.pop_back(); // Remover 1 da contagem
+                    minDegree->isDominated = true; // Talvez ja estivesse com true, mas garanto aqui
+
+                }else if(howManyTwo > 1 && needToBeOne){
+                    minDegree->label = 1;
+                    minDegree->isDominated = true;
+                }
+
+                labelEqualsTwo.erase(labelEqualsTwo.begin()); 
+                // if(howManyTwo == 1 && howManyDefenseless == 0){
+                    
+                // }else if(howManyTwo > 1 || howManyTwo < 1){
+                //     minDegree->label = 2;
+                //     minDegree->isDominated = true;
+                
+                // }
             }
         }
     }

@@ -150,12 +150,48 @@ int main(int argc, char *argv[]){
 
     vector<Graph*> graphs = readAllGraphsFromDir(params.file_path);
 
+    GeneticAlgorithm* GA = new GeneticAlgorithm(graphs[0], params.populationFactor, params.tournamentSize, params.maxStagnant, params.mutationRate, params.elitismRate, params.crossoverRate, params.generations);
+    GA->gaFlow();
+
     // for(int i = 0; i < graphs.size(); i++){
     //     delete graphs[i];
     // }
-    GeneticAlgorithm* GA = new GeneticAlgorithm(graphs[4], params.populationFactor, params.tournamentSize, params.maxStagnant, params.mutationRate, params.elitismRate, params.crossoverRate, params.generations);
-    GA->gaFlow();
 
+    // int n = 10;
+    // vector<pair<int,int>> e;
+    // e.push_back(make_pair(0,1));
+    // e.push_back(make_pair(0,5));
+    // e.push_back(make_pair(0,6));
+    // e.push_back(make_pair(0,9));
+    // e.push_back(make_pair(1,2));
+    // e.push_back(make_pair(2,3));
+    // e.push_back(make_pair(3,4));
+    // e.push_back(make_pair(3,8));
+    // e.push_back(make_pair(4,7));
+    // e.push_back(make_pair(4,5));
+    // e.push_back(make_pair(5,7));
+    // e.push_back(make_pair(6,8));
+    // e.push_back(make_pair(6,7));
+    // e.push_back(make_pair(7,8));
+    
+    // // A -> 0 -> ok
+    // // B -> 1 -> ok
+    // // C -> 2 -> ok
+    // // D -> 3 -> ok
+    // // E -> 4 -> ok
+    // // F -> 5 -> ok
+    // // G -> 6 -> ok
+    // // H -> 7 -> ok
+    // // I -> 8 -> ok
+    // // J -> 9 -> ok
+    // Graph* G = new Graph(n, e);
+    // GeneticAlgorithm* GA = new GeneticAlgorithm(G,1,1,1,1,1,1,1);
+    // vector<int> problem {0,2,0,1,0,0,2,2,0,1};
+    // GA->injectSolution(problem);
 
+    // cout << GA->prd->check_prd(GA->population[9]) << endl;
+    // GA->printSingleSolution(GA->population[9]);
+    // Solution * s = GA->prd->fixSolution(GA->population[9]);
+    // GA->printSingleSolution(s);
     return 0;
 }

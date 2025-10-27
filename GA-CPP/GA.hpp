@@ -40,8 +40,12 @@ class GeneticAlgorithm {
 
         // Elitism
         std::vector<Solution*> defaultElitism(std::vector<Solution*>& current, std::vector<Solution*>& newPop);
-    private:
-    
+
+
+        void injectSolution(std::vector<int> s);
+        void printSingleSolution(Solution* solution);
+        private:
+        
         // Auxiliary functions
         
         Solution* findMinimal(std::vector<Solution*>& preSelected, int toSee);
@@ -49,7 +53,6 @@ class GeneticAlgorithm {
         std::vector<Solution*> initializePopulation();
         void printVectorGA(std::vector<int> x, std::vector<int> y);
         void printSolutions(std::vector<Solution*>& pop);
-        void printSingleSolution(Solution* solution);
 
 };
 
