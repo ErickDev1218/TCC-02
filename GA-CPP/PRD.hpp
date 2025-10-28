@@ -32,11 +32,13 @@ class PRD {
         Solution* reduceWeightV2(Solution* s); 
     private:
         void restartGraph();
+        void resetGraph(std::vector<int> s);
 };
 
 
 
 
 #endif
+
 
 
