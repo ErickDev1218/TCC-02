@@ -26,6 +26,13 @@ Graph::~Graph(){
     }
 }
 
+std::vector<int> Graph::getLabels(){
+    std::vector<int> aux;
+    for(Node* u: this->nodes){
+        aux.push_back(u->label);
+    }
+    return aux;
+}
 // void Graph::printGraph() {
 //     for (auto node : this->nodes) {
 //         std::cout << "Node " << node->id << " (Label: " << node->label << ", Dominated: " << node->isDominated << ") -> Neighbors: ";
@@ -34,4 +41,5 @@ Graph::~Graph(){
 //         }
 //         std::cout << std::endl;
 //     }
+
 // }
