@@ -12,13 +12,14 @@ class Graph{
         Graph(int numNodes, std::vector<std::pair<int, int>> edges);
         ~Graph();
         
-        // vector<int> getLabels(int u, int v);
+        std::vector<int> getLabels();
         // void label_nodes(vector<int> labels);
         // vector<boolean> get_dominated_status();
         // void reset_labels_and_dominance();
 
         // void printGraph();
 };
+
 
 
 
