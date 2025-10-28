@@ -230,7 +230,7 @@ void PRD::restartGraph() {
     for(int i = 0; i < this->graph->numNodes; i++){
         this->graph->nodes[i]->label = -1;
         this->graph->nodes[i]->isDominated = false;
-        this->graph->nodes[i]->dominanceNumber.clear();
+        this->graph->nodes[i]->dominatedFor = 0;
     }
 }
 
@@ -401,4 +401,98 @@ Solution* PRD::fixSolution(Solution* s){
     }
     return new Solution(n, this);
 }
+
+
+Solution* PRD::fixSolution_AtilioV1(Solution* s){
+    // Conversar amanhã se realmente precisa estar na ordem crescente de grau
+    for(Node* u: this->graph->nodes){
+        if(u->label == 0) {
+            int countTwo = 0;
+            bool hasSomeDominated = false;
+            for(Node* v: u->neighborhood){
+                if(v->label == 2){
+                    countTwo++;
+                }
+                if(v->label == 0 && v->isDominated){
+                    hasSomeDominated = true;
+                }
+            }
+
+            if(countTwo == 1){
+                continue;
+            } else if(countTwo == 0 && !hasSomeDominated){
+                u->label = 2;
+            }else{
+                u->label = 1;
+            }
+        }
+    }
+    return reduceWeight1(s);
+}
+
+Solution* PRD::reduceWeightV1(Solution* s){
+    for(Node* u: this->graph->nodes){
+        if(u->label == 1){
+            int countTwo = 0;
+            for(Node* v: u->neighborhood){
+                if(v->label == 2){
+                    countTwo++;
+                }
+            }
+            if(countTwo == 1){
+                u->label = 0;
+            }
+        }       
+    }
+    std::vector<int> aux;
+    for(Node* u: this->graph->nodes){
+        aux.push_back(u->label);
+    }
+    delete s;
+    return new Solution(aux, this->prd);
+}
+
+Solution* PRD::reduceWeightV2(Solution* s){
+    for(Node* u: this->graph->nodes){
+        int countTwo = 0;
+        std::vector<Node*> aux;
+        for(Node* v: u->neighborhood){
+            if(v->label == 2) {
+                countTwo++;
+                aux.push_back(v);
+            }
+        }
+
+        for(Node* v: aux){
+            bool safe = true;
+            for(Node* w: v->neighborhood){
+                if(w->label == 0 && countTwo == 1){
+                    safe = false;
+                    break;
+                }
+            }
+            if(safe){
+                v->label = 1;
+            }
+            for(Node* u: v->neighborhood){
+                u->dominatedFor--;
+            }
+        }
+    }
+
+    for(Node* v: this->graph->nodes){
+        if(v->label == 1 && v->dominatedFor == 1){
+            v->label = 0;
+        }
+    }
+    std::vector<int> aux;
+    for(Node* u: this->graph->nodes){
+        aux.push_back(u->label);
+    }
+    delete s;
+    return new Solution(aux, this->prd);
+    
+}
+
+
 
