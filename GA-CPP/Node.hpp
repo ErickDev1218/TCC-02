@@ -8,7 +8,7 @@ class Node {
         int label = -1;
         bool isDominated = false;
         std::vector<Node*> neighborhood;
-        int dominatedFor;
+        int dominatedFor = 0;
 
         Node() = default;
         ~Node() = default;
@@ -17,4 +17,5 @@ class Node {
 
 
 #endif
+
 
