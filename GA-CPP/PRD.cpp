@@ -234,28 +234,30 @@ void PRD::restartGraph() {
     }
 }
 
-Solution* PRD::fixSolution(Solution* s){
-    this->restartGraph(); // Coloca o grafo em estado inicial
-
-    // Rotule o grafo
+void PRD::resetGraph(std::vector<int> s){
     for(int i = 0; i < this->graph->numNodes; i++){
         this->graph->nodes[i]->label = s->solution[i];
         if(s->solution[i] == 1){
             this->graph->nodes[i]->isDominated = true; // Ele se domina
-            this->graph->nodes[i]->dominanceNumber.push_back(true); // Adiciona +1 no numero de dominacao
-            this->graph->nodes[i]->dominanceNumber.push_back(true); // Adicionado depois
-            // Nao vou dar um push_back no dominanceNumber pois esse campo é usado para f(v) == 0
+            this->graph->nodes[i]->dominatedFor++; // Adiciona +1 no numero de dominacao
         }else if(s->solution[i] == 2){
             this->graph->nodes[i]->isDominated = true;
-            this->graph->nodes[i]->dominanceNumber.push_back(true); // Adiciona +1 no numero de dominacao
-            // Para f(v) == 2 eh necessario marcar os vizinhos 0 como dominados e dar um push_back
+            this->graph->nodes[i]->dominatedFor++; // Adiciona +1 no numero de dominacao
+            // Para f(v) == 2 eh necessario marcar os vizinhos como dominados e dar um push_back
             // no dominanceNumber
             for(Node* u : this->graph->nodes[i]->neighborhood){
                 u->isDominated = true;
-                u->dominanceNumber.push_back(true);
+                u->dominatedFor++;
             }
+        }else {
+            this->graph->nodes[i] = 0;
+            // O resto dos atributos serão preenchidos pelos casos acima
         }
     }
+}
+Solution* PRD::fixSolution(Solution* s){
+    this->resetGraph(s->solution); // Coloca o grafo em estado inicial com rotulacoes e dominacoes
+
     // Acredito que nesse ponto o grafo estara rotulado e 
     // os vertices 0 que tem mais de um vizinho com rotulo 2
     // tem dominanceNumber.size() >= 2 -> trocar dominanceNumber por um int depois
@@ -394,16 +396,13 @@ Solution* PRD::fixSolution(Solution* s){
 
     // Agora com a solucao corrigida, deleta a passada e retorna uma nova
     delete s;
-    std::vector<int> n;
-    n.reserve(this->graph->numNodes);
-    for(Node* u : this->graph->nodes){
-        n.push_back(u->label);
-    }
+    std::vector<int> n = this->graph->getLabels();
     return new Solution(n, this);
 }
 
 
 Solution* PRD::fixSolution_AtilioV1(Solution* s){
+    this->resetGraph(s->solution);
     // Conversar amanhã se realmente precisa estar na ordem crescente de grau
     for(Node* u: this->graph->nodes){
         if(u->label == 0) {
@@ -444,10 +443,7 @@ Solution* PRD::reduceWeightV1(Solution* s){
             }
         }       
     }
-    std::vector<int> aux;
-    for(Node* u: this->graph->nodes){
-        aux.push_back(u->label);
-    }
+    std::vector<int> aux = this->graph->getLabels();
     delete s;
     return new Solution(aux, this->prd);
 }
@@ -485,14 +481,12 @@ Solution* PRD::reduceWeightV2(Solution* s){
             v->label = 0;
         }
     }
-    std::vector<int> aux;
-    for(Node* u: this->graph->nodes){
-        aux.push_back(u->label);
-    }
+    std::vector<int> aux = this->graph->getLabels();
     delete s;
     return new Solution(aux, this->prd);
     
 }
+
 
 
 
