@@ -113,7 +113,7 @@ Graph* readGraphFromFile(const std::string& path) {
     }
 
 
-    Graph* g = new Graph(qtd_vertices, edges);
+    Graph* g = new Graph(qtd_vertices, edges, path);
 
     file.close();
     return g;
@@ -150,14 +150,16 @@ int main(int argc, char *argv[]){
 
     vector<Graph*> graphs = readAllGraphsFromDir(params.file_path);
 
-    GeneticAlgorithm* GA = new GeneticAlgorithm(graphs[0], params.populationFactor, params.tournamentSize, params.maxStagnant, params.mutationRate, params.elitismRate, params.crossoverRate, params.generations);
-    GA->gaFlow();
+    
+    for(int i = 0; i < 10; i++){
+        GeneticAlgorithm* GA = new GeneticAlgorithm(graphs[i], params.populationFactor, params.tournamentSize, params.maxStagnant, params.mutationRate, params.elitismRate, params.crossoverRate, params.generations);
+        GA->gaFlow();
+        cout << endl;
 
-    // for(int i = 0; i < graphs.size(); i++){
-    //     delete graphs[i];
-    // }
+    }
 
     // int n = 10;
+    
     // vector<pair<int,int>> e;
     // e.push_back(make_pair(0,1));
     // e.push_back(make_pair(0,5));
@@ -184,14 +186,17 @@ int main(int argc, char *argv[]){
     // // H -> 7 -> ok
     // // I -> 8 -> ok
     // // J -> 9 -> ok
+
     // Graph* G = new Graph(n, e);
     // GeneticAlgorithm* GA = new GeneticAlgorithm(G,1,1,1,1,1,1,1);
     // vector<int> problem {0,2,0,1,0,0,2,2,0,1};
     // GA->injectSolution(problem);
 
-    // cout << GA->prd->check_prd(GA->population[9]) << endl;
+    // // cout << GA->prd->check_prd(GA->population[9]) << endl;
     // GA->printSingleSolution(GA->population[9]);
-    // Solution * s = GA->prd->fixSolution(GA->population[9]);
+    // GA->prd->resetGraph(GA->population[9]->solution);
+    // GA->g->printGraph();
+    // Solution * s = GA->prd->fixSolution_AtilioV1(GA->population[9]);
     // GA->printSingleSolution(s);
     return 0;
 }

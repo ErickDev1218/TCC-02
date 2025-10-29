@@ -26,13 +26,13 @@ class PRD {
         
         bool check_prd(Solution* sol);
         
-        Solution* fixSolution_ErickV1(Solution* s);
+        // Solution* fixSolution_ErickV1(Solution* s);
         Solution* fixSolution_AtilioV1(Solution* s);
         Solution* reduceWeightV1(Solution* s);
         Solution* reduceWeightV2(Solution* s); 
+        void resetGraph(std::vector<int> s);
     private:
         void restartGraph();
-        void resetGraph(std::vector<int> s);
 };
 
 

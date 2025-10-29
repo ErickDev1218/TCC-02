@@ -18,14 +18,6 @@ int Solution::calculateFitness(){
     return fitness;
 }
 
-void Solution::printSolution(){
-    std::cout << "Solution: ";
-    for(int i = 0; i < this->solution.size(); i++){
-        std::cout << this->solution[i] << " ";
-    }
-    std::cout << "\nFitness: " << this->fitness << " - isValid:" << this->isValid << std::endl;
-}
-
 bool Solution::operator >(const Solution& other) const{
     return this->fitness > other.fitness;
 }
@@ -44,4 +36,12 @@ bool Solution::operator >=(const Solution& other) const{
 
 bool Solution::operator <=(const Solution& other) const{
     return this->fitness <= other.fitness;
+}
+
+void Solution::printSolution(){
+    std::cout << "Solution: ";
+    for(int i = 0; i < this->solution.size(); i++){
+        std::cout << this->solution[i] << " ";
+    }
+    std::cout << "\nFitness: " << this->fitness << " - isValid:" << this->isValid << std::endl;
 }

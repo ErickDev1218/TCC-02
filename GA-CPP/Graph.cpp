@@ -1,10 +1,11 @@
 #include "Graph.hpp"
 #include <iostream>
 
-Graph::Graph(int numNodes, std::vector<std::pair<int, int>> edges) {
+Graph::Graph(int numNodes, std::vector<std::pair<int, int>> edges, std::string gName) {
     this->numNodes = numNodes;
     this->nodes.reserve(numNodes);
-    
+    this->graphName = gName;
+
     for (int i = 0; i < numNodes; i++) {
         Node* newNode = new Node();
         this->nodes.push_back(newNode);
@@ -33,13 +34,13 @@ std::vector<int> Graph::getLabels(){
     }
     return aux;
 }
-// void Graph::printGraph() {
-//     for (auto node : this->nodes) {
-//         std::cout << "Node " << node->id << " (Label: " << node->label << ", Dominated: " << node->isDominated << ") -> Neighbors: ";
-//         for (auto neighbor : node->neighborhood) {
-//             std::cout << neighbor->id << " ";
-//         }
-//         std::cout << std::endl;
-//     }
+void Graph::printGraph() {
+    for (Node* node : this->nodes) {
+        std::cout << "Label: " << node->label << ", Dominated: " << node->isDominated << ", Dominado por: " << node->dominatedFor << " -> Neighbors labels: ";
+        for (auto neighbor : node->neighborhood) {
+            std::cout << neighbor->label << " ";
+        }
+        std::cout << std::endl;
+    }
 
-// }
+}

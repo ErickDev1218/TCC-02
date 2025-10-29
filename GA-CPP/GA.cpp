@@ -7,7 +7,6 @@
 #include <iostream> 
 
 GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int stagnant,float mutRate, float eleSize, float crosRate, int maxGenerations) {
-    std::cout << "aqui";
     this->mutationRate = mutRate;
     this->populationSize = g->numNodes / popFactor;
     this->elitismSize = static_cast<std::size_t>(std::floor(this->populationSize * eleSize));
@@ -31,9 +30,9 @@ void GeneticAlgorithm::gaFlow() {
     for(int i = 0; i < maxGenerations; i++){
         if(gen >= this->maxStagnant) break; 
 
-        std::cout << "Geracao " << i+1 << std::endl;
-        GeneticAlgorithm::printSolutions(currentPop);
-        std::cout << std::endl;
+        // std::cout << "Geracao " << i+1 << std::endl;
+        // GeneticAlgorithm::printSolutions(currentPop);
+        // std::cout << std::endl;
         // Selection
         std::vector<std::pair<Solution*, Solution*>> select = GeneticAlgorithm::tournamentSelection(currentPop);
 
@@ -43,14 +42,15 @@ void GeneticAlgorithm::gaFlow() {
         // Mutation
         GeneticAlgorithm::randomMutation(newPop);
 
-        std::cout << "Melhor atual " << std::endl;
-        GeneticAlgorithm::printSingleSolution(&best);
+        // std::cout << "Melhor atual " << std::endl;
+        // GeneticAlgorithm::printSingleSolution(&best);
         // Elitism
         currentPop = GeneticAlgorithm::defaultElitism(currentPop, newPop);
         for(int i = 0; i < currentPop.size(); i++){
             if(!currentPop[i]->isValid){
-                std::cout << "entrei" << std::endl;
-                currentPop[i] = this->prd->fixSolution(currentPop[i]);
+                // std::cout << "entrei" << std::endl;
+                currentPop[i] = this->prd->fixSolution_AtilioV1(currentPop[i]);
+                // std::cout << "Solucao valida apos fix? " << currentPop[i]->isValid << std::endl;
             }
         }
         if(*currentPop[0] < best) {
@@ -65,9 +65,8 @@ void GeneticAlgorithm::gaFlow() {
     // Por fim, a populacao final é salva
     this->population = currentPop;
 
-    std::cout << "Melhor solução encontrada globalmente" << std::endl;
+    std::cout << "Melhor solução encontrada globalmente para o grafo " << this->g->graphName << std::endl;
     GeneticAlgorithm::printSingleSolution(&best);
-    std::cout << std::endl;
 
 }
 
@@ -142,7 +141,7 @@ void GeneticAlgorithm::randomMutation(std::vector<Solution*>& pop){
     // Geradores aleatórios 
     std::mt19937 gen(std::random_device{}());
     std::uniform_real_distribution<> dis(0.0, 1.0);
-    std::uniform_int_distribution<> disInt(0, 2);
+    std::uniform_int_distribution<> disInt(0, 1);
 
 
     for (Solution*& sol : pop) {
@@ -150,7 +149,7 @@ void GeneticAlgorithm::randomMutation(std::vector<Solution*>& pop){
         // Para todo gene, verifique a chance de mutação
         for (int k = 0; k < sol->solution.size(); k++) {
             if (dis(gen) < this->mutationRate) {
-                sol->solution[k] = disInt(gen);
+                sol->solution[k] = disInt(gen) * 2;
                 changed = true;
             }
         }

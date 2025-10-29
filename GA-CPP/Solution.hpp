@@ -13,8 +13,9 @@ class Solution {
         Solution(std::vector<int> solution, PRD* prd);
         ~Solution() = default;
         
-        void printSolution();
         int calculateFitness();
+        void printSolution();
+
 
         bool operator >(const Solution& other) const;
         bool operator <(const Solution& other) const;
