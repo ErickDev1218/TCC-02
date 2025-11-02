@@ -34,6 +34,7 @@ std::vector<int> Graph::getLabels(){
     }
     return aux;
 }
+
 void Graph::printGraph() {
     for (Node* node : this->nodes) {
         std::cout << "Label: " << node->label << ", Dominated: " << node->isDominated << ", Dominado por: " << node->dominatedFor << " -> Neighbors labels: ";

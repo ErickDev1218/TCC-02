@@ -3,59 +3,53 @@
 #include "Graph.hpp"
 #include "Solution.hpp"
 #include "PRD.hpp"
-#include <vector>
-#include <utility>
-#include <cmath>
 
 class GeneticAlgorithm {
-    public:
-        float mutationRate;
-        float elitismSize;
-        float crossoverRate;
-        int populationSize;
-        int maxGenerations;
-        int maxStagnant;
-        int tournamentSize;
+        public:
+            float mutationRate;
+            float elitismSize;
+            float crossoverRate;
+            int populationSize;
+            int maxGenerations;
+            int maxStagnant;
+            int tournamentSize;
 
-        std::vector<Solution*> population;
-        Graph* g = nullptr;
-        PRD* prd = nullptr;
+            std::vector<Solution*> population;
+            Graph* g = nullptr;
+            PRD* prd = nullptr;
 
-        GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int stagnant,float mutRate, float eleSize, float crosRate, int maxGenerations);
+            GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int stagnant,float mutRate, float eleSize, float crosRate, int maxGenerations);
 
-        ~GeneticAlgorithm() = default;
+            ~GeneticAlgorithm() = default;
 
-        void gaFlow();
+            
+            void gaFlow();
+            void injectSolution(std::vector<int> s);
+            void printSingleSolution(Solution* solution);
+            
+            // OPERATORS
 
-        // OPERATORS
+            // Selection
+            std::vector<std::pair<Solution*, Solution*>> tournamentSelection(std::vector<Solution*> population);
 
-        // Selection
-        std::vector<std::pair<Solution*, Solution*>> tournamentSelection(std::vector<Solution*> population);
+            // Crossover
+            std::vector<Solution*> onePointCrossover(std::vector<std::pair<Solution*, Solution*>> pop);
+            
+            // Mutation
+            void randomMutation(std::vector<Solution*>& pop);
 
-        // Crossover
-       std::vector<Solution*> onePointCrossover(std::vector<std::pair<Solution*, Solution*>> pop);
+            // Elitism
+            std::vector<Solution*> defaultElitism(std::vector<Solution*>& current, std::vector<Solution*>& newPop);
 
-       // Mutation
-       void randomMutation(std::vector<Solution*>& pop);
-
-        // Elitism
-        std::vector<Solution*> defaultElitism(std::vector<Solution*>& current, std::vector<Solution*>& newPop);
-
-
-        void injectSolution(std::vector<int> s);
-        void printSingleSolution(Solution* solution);
         private:
-        
-        // Auxiliary functions
-        
-        Solution* findMinimal(std::vector<Solution*>& preSelected, int toSee);
-        Solution* fixElement(Solution* element);
-        std::vector<Solution*> initializePopulation();
-        void printVectorGA(std::vector<int> x, std::vector<int> y);
-        void printSolutions(std::vector<Solution*>& pop);
+
+            // Auxiliary functions
+            Solution* findMinimal(std::vector<Solution*>& preSelected, int toSee);
+            Solution* changeSolution(Solution* element);
+            std::vector<Solution*> initializePopulation();
+            void printVectorGA(std::vector<int> x, std::vector<int> y);
+            void printSolutions(std::vector<Solution*>& pop);
 
 };
-
-
 
 #endif

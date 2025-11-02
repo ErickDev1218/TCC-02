@@ -1,10 +1,9 @@
 #ifndef GRAPH_CPP
 #define GRAPH_CPP
-#include <vector>
 #include "Node.hpp"
+#include <vector>
 #include <utility>
 #include <string>
-
 
 class Graph{
     public:
@@ -16,15 +15,7 @@ class Graph{
         ~Graph();
         
         std::vector<int> getLabels();
-        // void label_nodes(vector<int> labels);
-        // vector<boolean> get_dominated_status();
-        // void reset_labels_and_dominance();
-
         void printGraph();
 };
-
-
-
-
 
 #endif

@@ -1,12 +1,8 @@
 #include "GA.hpp"
 #include "Solution.hpp"
-#include <random>
-#include <utility>
-#include <vector>
-#include <algorithm>
-#include <iostream> 
 
 GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int stagnant,float mutRate, float eleSize, float crosRate, int maxGenerations) {
+
     this->mutationRate = mutRate;
     this->populationSize = g->numNodes / popFactor;
     this->elitismSize = static_cast<std::size_t>(std::floor(this->populationSize * eleSize));
@@ -18,21 +14,17 @@ GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int s
     this->g = g;
     this->prd = new PRD(this->g);
     this->population = this->initializePopulation();
-    
 }
 
 
 void GeneticAlgorithm::gaFlow() {
+
     std::vector<Solution*> currentPop = this->population;
     Solution best = Solution(currentPop[0]->solution, this->prd);
 
     int gen = 0;
-    for(int i = 0; i < maxGenerations; i++){
-        if(gen >= this->maxStagnant) break; 
+    for(int i = 0; i < maxGenerations && gen < this->maxStagnant; i++){
 
-        // std::cout << "Geracao " << i+1 << std::endl;
-        // GeneticAlgorithm::printSolutions(currentPop);
-        // std::cout << std::endl;
         // Selection
         std::vector<std::pair<Solution*, Solution*>> select = GeneticAlgorithm::tournamentSelection(currentPop);
 
@@ -42,15 +34,13 @@ void GeneticAlgorithm::gaFlow() {
         // Mutation
         GeneticAlgorithm::randomMutation(newPop);
 
-        // std::cout << "Melhor atual " << std::endl;
-        // GeneticAlgorithm::printSingleSolution(&best);
         // Elitism
         currentPop = GeneticAlgorithm::defaultElitism(currentPop, newPop);
         for(int i = 0; i < currentPop.size(); i++){
             if(!currentPop[i]->isValid){
                 // std::cout << "entrei" << std::endl;
-                currentPop[i] = this->prd->fixSolution_AtilioV1(currentPop[i]);
-                // std::cout << "Solucao valida apos fix? " << currentPop[i]->isValid << std::endl;
+                currentPop[i] = this->prd->fixSolution(currentPop[i]);
+                std::cout << "Solucao valida apos fix? " << currentPop[i]->isValid << std::endl;
             }
         }
         if(*currentPop[0] < best) {
@@ -155,7 +145,7 @@ void GeneticAlgorithm::randomMutation(std::vector<Solution*>& pop){
         }
         // Solucao alterada, necessario recalcular
         if (changed) {
-            sol = this->fixElement(sol);
+            sol = this->changeSolution(sol);
         }
     }
 }
@@ -212,7 +202,7 @@ Solution* GeneticAlgorithm::findMinimal(std::vector<Solution*>& preSelected, int
     return minimal;
 }
 
-Solution* GeneticAlgorithm::fixElement(Solution* element){
+Solution* GeneticAlgorithm::changeSolution(Solution* element){
     Solution* aux = new Solution(element->solution, this->prd);
     delete element;
     return aux;
@@ -220,11 +210,11 @@ Solution* GeneticAlgorithm::fixElement(Solution* element){
 
 std::vector<Solution*> GeneticAlgorithm::initializePopulation(){
     
-    std::vector<Solution*> aux = this->prd->randomized_initialization();
-    aux.push_back(this->prd->greedy_initialization());
+    std::vector<Solution*> aux = this->prd->randomizedInitialization();
+    aux.push_back(this->prd->greedyInitialization());
     
     for(int i = aux.size(); i < this->populationSize; i++){
-        aux.push_back(this->prd->random_solution());
+        aux.push_back(this->prd->randomSolution());
     }
 
     return aux;

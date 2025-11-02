@@ -12,17 +12,6 @@ class Node {
 
         Node() = default;
         ~Node() = default;
-
-        void checkSelfDominance(){
-            int n = this->dominatedFor;
-            if(n == 0){
-                this->isDominated = false;
-            }else if(n == 1 || n == 2){
-                this->isDominated = true;
-            }
-        }
-
-
 };
 
 

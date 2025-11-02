@@ -2,7 +2,7 @@
 #define SOLUTION_HPP
 #include <vector>
 
-class PRD; // Dependencia circular
+class PRD; // Circular dependency
 
 class Solution {
     public:
@@ -23,12 +23,5 @@ class Solution {
         bool operator >=(const Solution& other) const;
         bool operator <=(const Solution& other) const;
 };
-
-
-
-
-
-
-
 
 #endif
