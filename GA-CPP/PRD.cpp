@@ -204,10 +204,10 @@ void PRD::resetGraph(std::vector<int> s){
     }
 }
 
-void PRD::fixSolution(Solution* sol){
+void PRD::fixSolution(Solution* s){
     
-    this->resetGraph(sol->solution); // Reset the graph
-    this->reduceWeight(sol); // Call reduceWeight beforehand
+    this->resetGraph(s->solution); // Reset the graph
+    this->reduceWeight(s); // Call reduceWeight beforehand
     
     for(int i = 0; i < this->graph->nodes.size(); i++){
         Node* u = this->graph->nodes[i];

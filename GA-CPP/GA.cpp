@@ -93,7 +93,7 @@ std::vector<Solution*> GeneticAlgorithm::onePointCrossover(std::vector<std::pair
         Solution* dad = pair.first;
         Solution* mom = pair.second;
         
-        int solutionLength = this->graph->numNodes;
+        int solutionLength = this->g->numNodes;
 
         // Criar gerador de números aleatórios
         std::random_device rd;  // semente baseada em hardware

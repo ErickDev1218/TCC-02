@@ -7,7 +7,7 @@ Solution::Solution(std::vector<int> solution, PRD* prd){
     while(!isValid){
         prd->fixSolution(this); // Fix his solution
         bool test = prd->checkPRD(this);
-        std::cout << "Solucao valida apos fix? " << test << std::endl;
+        //std::cout << "Solucao valida apos fix? " << test << std::endl;
         isValid = test;
     }
     this->fitness = this->calculateFitness();
