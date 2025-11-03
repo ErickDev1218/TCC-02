@@ -24,8 +24,8 @@ class GeneticAlgorithm {
 
             
             void gaFlow();
-            void injectSolution(std::vector<int> s);
-            void printSingleSolution(Solution* solution);
+
+            
             
             // OPERATORS
 
@@ -44,12 +44,14 @@ class GeneticAlgorithm {
         private:
 
             // Auxiliary functions
-            Solution* findMinimal(std::vector<Solution*>& preSelected, int toSee);
+            Solution* findMinimal(std::vector<Solution*>& preSelected);
             Solution* changeSolution(Solution* element);
             std::vector<Solution*> initializePopulation();
             void printVectorGA(std::vector<int> x, std::vector<int> y);
             void printSolutions(std::vector<Solution*>& pop);
+            void printSingleSolution(Solution* solution);
 
 };
+
 
 #endif
