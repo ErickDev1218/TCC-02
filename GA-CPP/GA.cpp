@@ -36,13 +36,13 @@ void GeneticAlgorithm::gaFlow() {
 
         // Elitism
         currentPop = GeneticAlgorithm::defaultElitism(currentPop, newPop);
-        for(int i = 0; i < currentPop.size(); i++){
-            if(!currentPop[i]->isValid){
-                // std::cout << "entrei" << std::endl;
-                currentPop[i] = this->prd->fixSolution(currentPop[i]);
-                std::cout << "Solucao valida apos fix? " << currentPop[i]->isValid << std::endl;
-            }
-        }
+        // for(int i = 0; i < currentPop.size(); i++){
+        //     if(!currentPop[i]->isValid){
+        //         // std::cout << "entrei" << std::endl;
+        //         currentPop[i] = this->prd->fixSolution(currentPop[i]);
+        //         std::cout << "Solucao valida apos fix? " << currentPop[i]->isValid << std::endl;
+        //     }
+        // }
         if(*currentPop[0] < best) {
             std::cout << "Trocado por " << std::endl;
             GeneticAlgorithm::printSingleSolution(currentPop[0]);
@@ -139,7 +139,7 @@ void GeneticAlgorithm::randomMutation(std::vector<Solution*>& pop){
                 changed = true;
             }
         }
-        // Solucao alterada, necessario recalcular
+        // Solution changed, recalculation required.
         if (changed) {
             sol = this->changeSolution(sol);
         }
@@ -264,3 +264,4 @@ void GeneticAlgorithm::printSingleSolution(Solution* ptr){
     }
 
 }
+
