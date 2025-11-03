@@ -4,6 +4,12 @@
 Solution::Solution(std::vector<int> solution, PRD* prd){
     this->solution = solution;
     this->isValid = prd->checkPRD(this);
+    while(!isValid){
+        prd->fixSolution(this); // Fix his solution
+        bool test = prd->checkPRD(this);
+        std::cout << "Solucao valida apos fix? " << test << std::endl;
+        isValid = test;
+    }
     this->fitness = this->calculateFitness();
 }
 
@@ -43,4 +49,5 @@ void Solution::printSolution(){
         std::cout << this->solution[i] << " ";
     }
     std::cout << "\nFitness: " << this->fitness << " - isValid:" << this->isValid << std::endl;
+
 }
