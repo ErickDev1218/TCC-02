@@ -74,9 +74,9 @@ std::vector<std::pair<Solution*, Solution*>> GeneticAlgorithm::tournamentSelecti
         // Embaralha o vetor
         std::shuffle(auxiliary.begin(), auxiliary.end(), gen);
     
-        Solution* first = GeneticAlgorithm::findMinimal(auxiliary, this->tournamentSize);
+        Solution* first = GeneticAlgorithm::findMinimal(auxiliary);
         
-        Solution* second = GeneticAlgorithm::findMinimal(auxiliary, this->tournamentSize);
+        Solution* second = GeneticAlgorithm::findMinimal(auxiliary);
         
     
         selectedPairs.push_back(std::make_pair(first, second));
@@ -93,9 +93,7 @@ std::vector<Solution*> GeneticAlgorithm::onePointCrossover(std::vector<std::pair
         Solution* dad = pair.first;
         Solution* mom = pair.second;
         
-        // GeneticAlgorithm::printVectorGA(dad->solution, mom->solution);
-
-        int solutionLength = dad->solution.size();
+        int solutionLength = this->graph->numNodes;
 
         // Criar gerador de números aleatórios
         std::random_device rd;  // semente baseada em hardware
@@ -105,7 +103,6 @@ std::vector<Solution*> GeneticAlgorithm::onePointCrossover(std::vector<std::pair
         std::uniform_int_distribution<> dis(1, solutionLength - 2);
 
         int randomIndex = dis(gen); // gera o número aleatório
-        // std::cout << "Random index is: " << randomIndex << std::endl;
         
         std::vector<int> firstChild;
         std::vector<int> secondChild; 
@@ -133,10 +130,9 @@ void GeneticAlgorithm::randomMutation(std::vector<Solution*>& pop){
     std::uniform_real_distribution<> dis(0.0, 1.0);
     std::uniform_int_distribution<> disInt(0, 1);
 
-
     for (Solution*& sol : pop) {
         bool changed = false;
-        // Para todo gene, verifique a chance de mutação
+        // For every gen, look if have mutation
         for (int k = 0; k < sol->solution.size(); k++) {
             if (dis(gen) < this->mutationRate) {
                 sol->solution[k] = disInt(gen) * 2;
@@ -154,12 +150,12 @@ void GeneticAlgorithm::randomMutation(std::vector<Solution*>& pop){
 std::vector<Solution*> GeneticAlgorithm::defaultElitism(std::vector<Solution*>& current, std::vector<Solution*>& newPop) {
 
     std::vector<Solution*> result;
-
-    // Ordena os vetores de solução
+    
+    // Sort the solution vectors
     std::sort(current.begin(), current.end(), [](Solution* a, Solution* b) { return *a < *b;}); 
     std::sort(newPop.begin(), newPop.end(), [](Solution* a, Solution* b) { return *a < *b;});
-    // Copia os melhores da geracao passada 
-    // e libera o restante da memoria
+    
+    // Copy the best features from the previous generation and free up the rest of memory.
     for(int i = 0; i < current.size(); i++){ 
         if(i < this->elitismSize){
             result.push_back(current[i]); 
@@ -167,8 +163,8 @@ std::vector<Solution*> GeneticAlgorithm::defaultElitism(std::vector<Solution*>& 
             delete current[i];
         }
     } 
-    // Copia o restante dos melhores da geracao atual
-    // e libera o restante da memoria
+    
+    // Copy the best features from this generagtion and free up the rest of memory.
     int res = newPop.size() - this->elitismSize;
     
     for(int i = 0; i < newPop.size(); i++){ 
@@ -176,24 +172,19 @@ std::vector<Solution*> GeneticAlgorithm::defaultElitism(std::vector<Solution*>& 
             result.push_back(newPop[i]);
         }else {
             delete newPop[i];
-        }
-        
+        }  
     } 
+    
     return result;
-}
-
-void GeneticAlgorithm::injectSolution(std::vector<int> s){
-    this->population.pop_back();
-    this->population.push_back(new Solution(s, this->prd));
 }
 
 // Auxiliary functions
 
-Solution* GeneticAlgorithm::findMinimal(std::vector<Solution*>& preSelected, int toSee) {
+Solution* GeneticAlgorithm::findMinimal(std::vector<Solution*>& preSelected) {
     Solution* minimal = preSelected[0];
     int indexToRemove = 0;
-    for(int i = 1; i < toSee; i++){
-        if(*preSelected[i] < *minimal){ // comparando objetos, não ponteiros
+    for(int i = 1; i < this->tournamentSize; i++){
+        if(*preSelected[i] < *minimal){
             minimal = preSelected[i];
             indexToRemove = i;
         }
@@ -209,14 +200,15 @@ Solution* GeneticAlgorithm::changeSolution(Solution* element){
 }
 
 std::vector<Solution*> GeneticAlgorithm::initializePopulation(){
-    
+
+    // Call randomized initialization to get a half of population
     std::vector<Solution*> aux = this->prd->randomizedInitialization();
+    // Call greedy initialization to get +1 solution, probabily the best solution in this population
     aux.push_back(this->prd->greedyInitialization());
-    
+    // Rest of population will be generated for randomizedSolution function
     for(int i = aux.size(); i < this->populationSize; i++){
         aux.push_back(this->prd->randomSolution());
     }
-
     return aux;
 }
 
@@ -270,4 +262,5 @@ void GeneticAlgorithm::printSingleSolution(Solution* ptr){
             std::cout << std::endl << std::endl;
         }
     }
+
 }
