@@ -19,8 +19,8 @@ class PRD {
         bool checkPRD(Solution* sol);
         Solution* greedyInitialization();
         Solution* randomSolution();
-        Solution* fixSolution(Solution* s);
-        Solution* reduceWeight(Solution* s); 
+        void fixSolution(Solution* s);
+        void reduceWeight(Solution* s); 
         std::vector<Solution*> randomizedInitialization();
         
     private:
@@ -32,6 +32,7 @@ class PRD {
 
 
 #endif
+
 
 
 
