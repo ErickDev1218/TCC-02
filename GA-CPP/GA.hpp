@@ -14,19 +14,20 @@ class GeneticAlgorithm {
             int maxStagnant;
             int tournamentSize;
 
+            std::mt19937 gen;
+            std::uniform_real_distribution<> dis; // [0, 1]
+            std::uniform_int_distribution<> disInt;   // {0, 1}
+
             std::vector<Solution*> population;
             Graph* g = nullptr;
             PRD* prd = nullptr;
 
             GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int stagnant,float mutRate, float eleSize, float crosRate, int maxGenerations);
 
-            ~GeneticAlgorithm() = default;
+            ~GeneticAlgorithm();
 
-            
             void gaFlow();
 
-            
-            
             // OPERATORS
 
             // Selection

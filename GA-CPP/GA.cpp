@@ -1,7 +1,7 @@
 #include "GA.hpp"
 #include "Solution.hpp"
 
-GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int stagnant,float mutRate, float eleSize, float crosRate, int maxGenerations) {
+GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int stagnant,float mutRate, float eleSize, float crosRate, int maxGenerations) : gen(std::random_device{}()),dis(0.1, 1.0), disInt(0, 1) {
 
     this->mutationRate = mutRate;
     this->populationSize = g->numNodes / popFactor;
@@ -10,12 +10,20 @@ GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int s
     this->maxGenerations = maxGenerations;
     this->maxStagnant = stagnant;
     this->tournamentSize = tournSize;
-    
+
     this->g = g;
     this->prd = new PRD(this->g);
     this->population = this->initializePopulation();
 }
 
+GeneticAlgorithm::~GeneticAlgorithm(){
+    delete this->g; // delete all nodes ang the graph
+    delete this->prd;
+    for(Solution* s: population){
+        delete s;
+    }
+    population.clear();
+}
 
 void GeneticAlgorithm::gaFlow() {
 
@@ -36,15 +44,9 @@ void GeneticAlgorithm::gaFlow() {
 
         // Elitism
         currentPop = GeneticAlgorithm::defaultElitism(currentPop, newPop);
-        // for(int i = 0; i < currentPop.size(); i++){
-        //     if(!currentPop[i]->isValid){
-        //         // std::cout << "entrei" << std::endl;
-        //         currentPop[i] = this->prd->fixSolution(currentPop[i]);
-        //         std::cout << "Solucao valida apos fix? " << currentPop[i]->isValid << std::endl;
-        //     }
-        // }
+
         if(*currentPop[0] < best) {
-            std::cout << "Trocado por " << std::endl;
+            std::cout << "A better solution has been found:  " << std::endl;
             GeneticAlgorithm::printSingleSolution(currentPop[0]);
             best = Solution(currentPop[0]->solution, this->prd);
             gen = 0;
@@ -52,10 +54,10 @@ void GeneticAlgorithm::gaFlow() {
             gen++;
         }
     }
-    // Por fim, a populacao final é salva
+    // Save the final population
     this->population = currentPop;
 
-    std::cout << "Melhor solução encontrada globalmente para o grafo " << this->g->graphName << std::endl;
+    std::cout << "Best solution found globally for the graph * " << this->g->graphName << " *" << std::endl;
     GeneticAlgorithm::printSingleSolution(&best);
 
 }
@@ -67,9 +69,6 @@ std::vector<std::pair<Solution*, Solution*>> GeneticAlgorithm::tournamentSelecti
     std::vector<std::pair<Solution*, Solution*>> selectedPairs;
     for(int i = 0; i < population.size() / 2; i++){
         std::vector<Solution*> auxiliary = population;
-        // Gerador aleatório
-        std::random_device rd;
-        std::mt19937 gen(rd());
         
         // Embaralha o vetor
         std::shuffle(auxiliary.begin(), auxiliary.end(), gen);
@@ -94,15 +93,7 @@ std::vector<Solution*> GeneticAlgorithm::onePointCrossover(std::vector<std::pair
         Solution* mom = pair.second;
         
         int solutionLength = this->g->numNodes;
-
-        // Criar gerador de números aleatórios
-        std::random_device rd;  // semente baseada em hardware
-        std::mt19937 gen(rd()); // gerador Mersenne Twister
-
-        // Distribuição uniforme entre 1 e N-1
-        std::uniform_int_distribution<> dis(1, solutionLength - 2);
-
-        int randomIndex = dis(gen); // gera o número aleatório
+        int randomIndex = dis(gen);
         
         std::vector<int> firstChild;
         std::vector<int> secondChild; 
@@ -125,11 +116,6 @@ std::vector<Solution*> GeneticAlgorithm::onePointCrossover(std::vector<std::pair
 
 // Mutation
 void GeneticAlgorithm::randomMutation(std::vector<Solution*>& pop){
-    // Geradores aleatórios 
-    std::mt19937 gen(std::random_device{}());
-    std::uniform_real_distribution<> dis(0.0, 1.0);
-    std::uniform_int_distribution<> disInt(0, 1);
-
     for (Solution*& sol : pop) {
         bool changed = false;
         // For every gen, look if have mutation
@@ -174,7 +160,8 @@ std::vector<Solution*> GeneticAlgorithm::defaultElitism(std::vector<Solution*>& 
             delete newPop[i];
         }  
     } 
-    
+    // Sort the result to get best solution on first position
+    std::sort(result.begin(), result.end(), [](Solution* a, Solution* b) { return *a < *b;}); 
     return result;
 }
 

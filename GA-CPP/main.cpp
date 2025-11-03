@@ -1,12 +1,4 @@
-#include "Solution.hpp"
-#include "Graph.hpp"
 #include "GA.hpp"
-#include "Solution.hpp"
-#include "PRD.hpp"
-#include <vector>
-#include <iostream>
-#include <utility>
-#include <iomanip> // para std::setw, opcional
 #include <fstream>
 #include <filesystem>
 
@@ -82,7 +74,7 @@ Parameters parse_args(int argc, char *argv[]) {
 
 void printParameters(const Parameters& p) {
     std::cout << "===== Genetic Algorithm Parameters =====\n";
-    std::cout << std::left; // alinha à esquerda
+    std::cout << std::left;
 
     std::cout << std::setw(20) << "Graph file:"       << p.file_path       << "\n";
     std::cout << std::setw(20) << "Output file:"      << p.output_file     << "\n";
@@ -96,107 +88,53 @@ void printParameters(const Parameters& p) {
     std::cout << "=========================================\n";
 }
 
-Graph* readGraphFromFile(const std::string& path) {
+void readGraphFromFile(Parameters params, const std::string& path) {
     std::ifstream file(path);
     if (!file.is_open()) {
-        throw std::runtime_error("Erro ao abrir arquivo: " + path);
+        throw std::runtime_error("Error opening file: " + path);
     }
-    int qtd_vertices, qtd_arestas;
+    int num_vertex, num_edges;
 
-    file >> qtd_vertices >> qtd_arestas;
+    file >> num_vertex >> num_edges;
     
     vector<pair<int, int>> edges;
-    // edges.resize(qtd_arestas);
+    edges.reserve(num_edges);
     int u, v;
     while (file >> u >> v) {
-        edges.push_back(make_pair(u,v)); // Classe grafo é capaz de criar a aresta v u
+        edges.push_back(make_pair(u,v));
     }
 
-
-    Graph* g = new Graph(qtd_vertices, edges, path);
+    Graph* g = new Graph(num_vertex, edges, fs::path (path).stem().string());
 
     file.close();
-    return g;
+
+    GeneticAlgorithm* GA = new GeneticAlgorithm(g, params.populationFactor, params.tournamentSize, params.maxStagnant, params.mutationRate, params.elitismRate, params.crossoverRate, params.generations);
+    
+    GA->gaFlow();
+
+    delete GA;
 }
 
-vector<Graph*> readAllGraphsFromDir(const std::string& dirPath) {
-    vector<Graph*> graphs;
-
-    // std::cout << "Tentando abrir diretório: " << std::filesystem::absolute(dirPath) << std::endl;
-    // if (!std::filesystem::exists(dirPath)) {
-    //     std::cerr << "❌ Diretório não encontrado!" << std::endl;
-    //     exit(1);
-    // }
+void readAllGraphsFromDir(Parameters params) {
+    const std::string& dirPath = params.file_path;
     
     for (const auto& entry : fs::directory_iterator(dirPath)) {
         if (entry.path().extension() == ".txt") {
-            std::cout << "📄 Lendo: " << entry.path().filename() << std::endl;
+            std::cout << "📄 Reading: " << entry.path().filename() << std::endl;
             try {
-                graphs.push_back(readGraphFromFile(entry.path().string()));
+                readGraphFromFile(params, entry.path().string());
             } catch (const std::exception& e) {
-                std::cerr << "Erro: " << e.what() << std::endl;
+                std::cerr << "Error: " << e.what() << std::endl;
             }
         }
     }
-
-    std::cout << "\n✅ Total de grafos carregados: " << graphs.size() << std::endl;
-    return graphs;
 }
 
 int main(int argc, char *argv[]){
 
     Parameters params = parse_args(argc, argv);
     printParameters(params);    
+    readAllGraphsFromDir(params);
 
-    vector<Graph*> graphs = readAllGraphsFromDir(params.file_path);
-
-    
-    for(int i = 0; i < 10; i++){
-        GeneticAlgorithm* GA = new GeneticAlgorithm(graphs[i], params.populationFactor, params.tournamentSize, params.maxStagnant, params.mutationRate, params.elitismRate, params.crossoverRate, params.generations);
-        GA->gaFlow();
-        cout << endl;
-
-    }
-
-    // int n = 10;
-    
-    // vector<pair<int,int>> e;
-    // e.push_back(make_pair(0,1));
-    // e.push_back(make_pair(0,5));
-    // e.push_back(make_pair(0,6));
-    // e.push_back(make_pair(0,9));
-    // e.push_back(make_pair(1,2));
-    // e.push_back(make_pair(2,3));
-    // e.push_back(make_pair(3,4));
-    // e.push_back(make_pair(3,8));
-    // e.push_back(make_pair(4,7));
-    // e.push_back(make_pair(4,5));
-    // e.push_back(make_pair(5,7));
-    // e.push_back(make_pair(6,8));
-    // e.push_back(make_pair(6,7));
-    // e.push_back(make_pair(7,8));
-    
-    // // A -> 0 -> ok
-    // // B -> 1 -> ok
-    // // C -> 2 -> ok
-    // // D -> 3 -> ok
-    // // E -> 4 -> ok
-    // // F -> 5 -> ok
-    // // G -> 6 -> ok
-    // // H -> 7 -> ok
-    // // I -> 8 -> ok
-    // // J -> 9 -> ok
-
-    // Graph* G = new Graph(n, e);
-    // GeneticAlgorithm* GA = new GeneticAlgorithm(G,1,1,1,1,1,1,1);
-    // vector<int> problem {0,2,0,1,0,0,2,2,0,1};
-    // GA->injectSolution(problem);
-
-    // // cout << GA->prd->check_prd(GA->population[9]) << endl;
-    // GA->printSingleSolution(GA->population[9]);
-    // GA->prd->resetGraph(GA->population[9]->solution);
-    // GA->g->printGraph();
-    // Solution * s = GA->prd->fixSolution_AtilioV1(GA->population[9]);
-    // GA->printSingleSolution(s);
     return 0;
 }

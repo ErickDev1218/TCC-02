@@ -11,7 +11,7 @@ class Graph{
         std::string graphName;
         std::vector<Node*> nodes;
 
-        Graph(int numNodes, std::vector<std::pair<int, int>> edges, std::string gName);
+        Graph(int numNodes, std::vector<std::pair<int, int>> edges, const std::string& gName);
         ~Graph();
         
         std::vector<int> getLabels();

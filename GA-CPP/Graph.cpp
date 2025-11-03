@@ -1,7 +1,7 @@
 #include "Graph.hpp"
 #include <iostream>
 
-Graph::Graph(int numNodes, std::vector<std::pair<int, int>> edges, std::string gName) {
+Graph::Graph(int numNodes, std::vector<std::pair<int, int>> edges, const std::string& gName) {
     this->numNodes = numNodes;
     this->nodes.reserve(numNodes);
     this->graphName = gName;
@@ -20,11 +20,10 @@ Graph::Graph(int numNodes, std::vector<std::pair<int, int>> edges, std::string g
 }
 
 Graph::~Graph(){
-    int i = 0;
-    while(!this->nodes.empty()){
-        delete this->nodes[i];
-        i++;
+    for(Node* u: this->nodes){
+        delete u;
     }
+    nodes.clear();
 }
 
 std::vector<int> Graph::getLabels(){
