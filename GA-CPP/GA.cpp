@@ -17,7 +17,6 @@ GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int s
 }
 
 GeneticAlgorithm::~GeneticAlgorithm(){
-    delete this->g; // delete all nodes ang the graph
     delete this->prd;
     for(Solution* s: population){
         delete s;
@@ -28,7 +27,7 @@ GeneticAlgorithm::~GeneticAlgorithm(){
 void GeneticAlgorithm::gaFlow() {
 
     std::vector<Solution*> currentPop = this->population;
-    Solution best = Solution(currentPop[0]->solution, this->prd);
+    bestFitness = currentPop[0]->fitness;
 
     int gen = 0;
     for(int i = 0; i < maxGenerations && gen < this->maxStagnant; i++){
@@ -45,10 +44,8 @@ void GeneticAlgorithm::gaFlow() {
         // Elitism
         currentPop = GeneticAlgorithm::defaultElitism(currentPop, newPop);
 
-        if(*currentPop[0] < best) {
-            std::cout << "A better solution has been found:  " << std::endl;
-            GeneticAlgorithm::printSingleSolution(currentPop[0]);
-            best = Solution(currentPop[0]->solution, this->prd);
+        if(currentPop[0]->fitness < bestFitness) {
+            bestFitness = currentPop[0]->fitness;
             gen = 0;
         }else {
             gen++;
@@ -56,10 +53,6 @@ void GeneticAlgorithm::gaFlow() {
     }
     // Save the final population
     this->population = currentPop;
-
-    std::cout << "Best solution found globally for the graph * " << this->g->graphName << " *" << std::endl;
-    GeneticAlgorithm::printSingleSolution(&best);
-
 }
 
 // OPERATORS

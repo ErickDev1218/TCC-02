@@ -1,0 +1,1382 @@
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:24:26 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+*** Solução Ótima Encontrada para o grafo 1138_bus ***
+Valor Objetivo: 647
+-----------------------------------------------
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:24:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+*** Solução Ótima Encontrada para o grafo 494_bus ***
+Valor Objetivo: 293
+-----------------------------------------------
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:24:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+*** Solução Ótima Encontrada para o grafo 662_bus ***
+Valor Objetivo: 358
+-----------------------------------------------
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:24:33 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:25:38 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:25:42 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:25:42 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:25:45 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:32:23 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:32:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:32:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:32:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:37:11 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:37:15 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:37:15 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:37:19 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:38:04 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:38:08 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:38:08 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 13:38:11 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-03
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:18 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:18 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:18 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:18 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:18 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:18 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:18 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:19 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:19 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:19 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:19 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:19 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:19 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:19 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:19 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:19 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:19 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:19 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:19 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:19 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:20 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:20 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:20 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:33:20 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:21 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:21 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:22 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:23 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:23 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:23 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:23 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:23 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:23 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:23 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:23 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:23 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:23 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:23 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:23 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:24 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:24 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:24 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:25 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:25 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:25 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:25 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:25 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:25 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:25 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:26 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:26 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:26 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:26 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:26 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:26 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:26 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:26 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:28 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:28 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:28 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:28 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:28 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:28 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:28 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:28 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:28 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:28 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:28 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:29 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:29 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:29 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:29 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:29 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:29 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:29 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:29 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:29 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:29 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:29 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:29 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:29 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:30 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:33 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:33 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:33 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:33 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:33 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:33 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:33 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:33 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:33 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:33 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:33 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:33 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:34 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:34 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:34 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:34 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:34 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:34 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:34 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:34 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:34 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:34 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:34 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:34 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:35 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:35 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:35 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:35 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:35 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:35 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:35 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:35 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:35 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:35 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:35 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:34:35 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732166
+Set parameter LogFile to value "optimization_log.log"
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:37:01 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:37:06 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:37:07 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:37:10 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:49:33 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:51:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:51:27 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:56:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:56:31 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:56:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:56:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:56:32 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:56:40 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:56:41 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:56:51 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:57:04 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:57:45 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04
+
+Gurobi 12.0.3 (linux64, C++) logging started Tue Nov  4 16:58:50 2025
+
+Set parameter Username
+Set parameter LicenseID to value 2732897
+Set parameter LogFile to value "optimization_log.log"
+Academic license - for non-commercial use only - expires 2026-11-04

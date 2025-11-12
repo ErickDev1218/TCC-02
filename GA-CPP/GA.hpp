@@ -21,12 +21,14 @@ class GeneticAlgorithm {
             std::vector<Solution*> population;
             Graph* g = nullptr;
             PRD* prd = nullptr;
+            int bestFitness = std::numeric_limits<int>::max();
 
             GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int stagnant,float mutRate, float eleSize, float crosRate, int maxGenerations);
 
             ~GeneticAlgorithm();
 
             void gaFlow();
+
 
             // OPERATORS
 
