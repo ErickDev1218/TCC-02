@@ -12,13 +12,141 @@ namespace fs = std::filesystem;
 using Vertex = int;
 using Graph = std::map<Vertex, std::vector<Vertex>>; // Adjacency list: Vertex -> list of neighbors
 
-// Função para construir o modelo
-void solve_optimization_problem(const Graph& G, const std::string& graphName) {
-    std::cout << graphName << "\n";
+struct Result {
+    std::string graph_name = "";
+    int node_count = -1;
+    int edge_count = -1;
+    float graph_density = -1;
+    int objValue = -1;
+    double elapsed_time = -1;
+};
+
+struct Parameters {
+    std::string file_path;
+    std::string output_file = "results.csv";
+};
+
+Parameters parse_args(int argc, char* argv[]);
+void ensure_csv_header(const std::string &filename);
+void write_result_to_csv(const std::string &filename, const Result &result);
+Graph readGraphAndSolve(const std::string& path, const std::string& output);
+void solvePRD(const Graph& G);
+
+
+int main(int argc, char *argv[]) {
+    // Exemplo de Grafo Simples: V={1, 2, 3}, E={(1,2), (2,3)}
+    // Graph G_example = {
+    //     {0, {1,6,9,5}},
+    //     {1, {0, 2}},
+    //     {2, {1, 3}},
+    //     {3, {2, 4, 8}},
+    //     {4, {3, 5, 7}},
+    //     {5, {4, 0, 7}},
+    //     {6, {0, 8, 7}},
+    //     {7, {4, 5, 6, 8}},
+    //     {8, {3, 6, 7}},
+    //     {9, {0}},
+    // };
+    //a 0
+    //b 1
+    //c 2
+    //d 3
+    //e 4
+    //f 5
+    //g 6
+    //h 7 
+    //i 8
+    //j 9
+
+    Parameters params = parse_args(argc, argv);
+    ensure_csv_header(params.output_file);
+    readGraphAndSolve(params.file_path, params.output_file);
+
+    return 0;
+}
+
+Parameters parse_args(int argc, char* argv[]){
+    Parameters res;
+    if(argc < 2){
+        std::cerr << "The file path and output path its required. \n";
+        exit(1);
+    }
+
+    res.file_path = argv[1];
+    res.output_file = argv[2];
+
+    return res;
+}
+
+void ensure_csv_header(const std::string &filename) {
+    bool file_exists = std::filesystem::exists(filename);
+    std::ofstream file;
+    if (!file_exists) {
+        file.open(filename);
+        file << "graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds)\n";
+        file.close();
+    } 
+}
+
+void write_result_to_csv(const std::string &filename, const Result &result) {
+    std::ofstream file(filename, std::ios::app);
+    file << result.graph_name << "," << result.node_count << ","
+         << result.edge_count << "," << result.graph_density << "," << result.fitness << ","
+         << result.elapsed_time << "\n"; 
+    file.close();
+}
+
+void readGraphAndSolve(const std::string& path, const std::string& output) {
+
+    Result res;
+
+    std::ifstream file(path);
+    if (!file.is_open()) {
+        throw std::runtime_error("Error opening file: " + path);
+    }
+
+    int num_vertex, num_edges;
+
+    file >> num_vertex >> num_edges;
+
+    res.node_count = num_vertex;
+    res.edge_count = num_edges;
+    res.graph_name = fs::path (path).stem().string();
+    res.graph_density = static_cast<float>(2 * num_edges) / (num_vertex * (num_vertex - 1));
+
+    Graph g;
+
+    for(int v = 0; v < num_vertex; v++){
+        g[v] = {};
+    }
+    
+    int u, v;
+    while (file >> u >> v) {
+        g[u].push_back(v);
+        g[v].push_back(u);
+    }
+
+    file.close();
+    
+    // Mostra o grafo
+    // for (const auto& [v, adj] : g) {
+    //     std::cout << v << ": ";
+    //     for (int neighbor : adj) {
+    //         std::cout << neighbor << " ";
+    //     }
+    //     std::cout << "\n";
+    
+    // }
+    solvePRD(g, res);
+
+    write_result_to_csv(output, res);
+}
+
+void solvePRD(const Graph& G, Result& res) {
     try {
         // 1. Configurar o Ambiente e o Modelo
         GRBEnv env = GRBEnv(true);
-        env.set("LogFile", "optimization_log.log");
+        // env.set("LogFile", "optimization_log.log");
         env.start();
 
         GRBModel model = GRBModel(env);
@@ -160,30 +288,18 @@ void solve_optimization_problem(const Graph& G, const std::string& graphName) {
             model.addConstr(R52b_lhs == 2, "R52b_" + std::to_string(v));
         }
 
+        // Definir tempo máximo em segundos
+        model.set(GRB_DoubleParam_TimeLimit, 900);
+
         // 5. Otimizar o Modelo
         model.optimize();
 
         // 6. Exibir os Resultados
-        if (model.get(GRB_IntAttr_Status) == GRB_OPTIMAL) {
+        int status = model.get(GRB_IntAttr_Status);
 
-            // std::cout << "\n*** Solução Ótima Encontrada para o grafo " << graphName << " ***" << std::endl;
-            // std::cout << "Valor Objetivo: " << model.get(GRB_DoubleAttr_ObjVal) << std::endl;
-            
-            // std::cout << "Variáveis:" << std::endl;
-            // for (Vertex v : V) {
-            //     std::cout << "x_" << v << " = " << x_vars[v].get(GRB_DoubleAttr_X) 
-            //               << ", y_" << v << " = " << y_vars[v].get(GRB_DoubleAttr_X) 
-            //               << std::endl;
-            // }
-            
-            std::ofstream logFile("Gurobi_PRD_solutions.log", std::ios::app); // abre em modo "append"
-            if (logFile.is_open()) {
-                logFile << graphName<< ";" << model.get(GRB_DoubleAttr_ObjVal) << ";" << model.get(GRB_DoubleAttr_Runtime) << "\n";
-                logFile.close();
-            }
-        } else {
-            std::cout << "\n*** Solução Não Ótima Encontrada (Status: " 
-                      << model.get(GRB_IntAttr_Status) << ") ***" << std::endl;
+        if (status == GRB_OPTIMAL || status == GRB_TIME_LIMIT) {
+            res.objValue = model.get(GRB_DoubleAttr_ObjVal);
+            res.elapsed_time = model.get(GRB_DoubleAttr_Runtime);
         }
 
     } catch (GRBException e) {
@@ -191,113 +307,4 @@ void solve_optimization_problem(const Graph& G, const std::string& graphName) {
     } catch (const std::exception& e) {
         std::cout << "Erro padrão: " << e.what() << std::endl;
     }
-}
-
-void readGraphFromFile(const std::string& path) {
-    std::string graphName = fs::path (path).stem().string();
-
-    // if(graphName != "1138_bus") return;
-
-    std::ifstream file(path);
-    if (!file.is_open()) {
-        throw std::runtime_error("Error opening file: " + path);
-    }
-
-    int num_vertex, num_edges;
-
-    file >> num_vertex >> num_edges;
-
-    Graph g;
-
-    for(int v = 0; v < num_vertex; v++){
-        g[v] = {};
-    }
-    
-    // vector<pair<int, int>> edges;
-    // edges.reserve(num_edges);
-
-    int u, v;
-    while (file >> u >> v) {
-        // edges.push_back(make_pair(u,v));
-        g[u].push_back(v);
-        g[v].push_back(u);
-    }
-
-    // Graph* g = new Graph(num_vertex, edges, fs::path (path).stem().string());
-
-    file.close();
-
-    // GeneticAlgorithm* GA = new GeneticAlgorithm(g, params.populationFactor, params.tournamentSize, params.maxStagnant, params.mutationRate, params.elitismRate, params.crossoverRate, params.generations);
-    
-    // GA->gaFlow();
-
-    // delete GA;
-    
-    // Mostra o grafo
-    // for (const auto& [v, adj] : g) {
-    //     std::cout << v << ": ";
-    //     for (int neighbor : adj) {
-    //         std::cout << neighbor << " ";
-    //     }
-    //     std::cout << "\n";
-    
-    // }
-    solve_optimization_problem(g, graphName);
-}
-
-void readAllGraphsFromDir(const std::string& dirPath) {
-    // const std::string& dirPath = params.file_path;
-    
-    for (const auto& entry : fs::directory_iterator(dirPath)) {
-        if (entry.path().extension() == ".txt") {
-            // std::cout << "📄 Reading: " << entry.path().filename() << std::endl;
-            try {
-                readGraphFromFile(entry.path().string());
-            } catch (const std::exception& e) {
-                std::cerr << "Error: " << e.what() << std::endl;
-            }
-        }
-    }
-}
-
-std::string parse_args(int argc, char* argv[]){
-    if(argc < 1){
-        std::cerr << "The file path its required. \n";
-        exit(1);
-    }
-
-    return argv[1];
-}
-// Exemplo de Uso (Main)
-int main(int argc, char *argv[]) {
-    // Exemplo de Grafo Simples: V={1, 2, 3}, E={(1,2), (2,3)}
-    // Graph G_example = {
-    //     {0, {1,6,9,5}},
-    //     {1, {0, 2}},
-    //     {2, {1, 3}},
-    //     {3, {2, 4, 8}},
-    //     {4, {3, 5, 7}},
-    //     {5, {4, 0, 7}},
-    //     {6, {0, 8, 7}},
-    //     {7, {4, 5, 6, 8}},
-    //     {8, {3, 6, 7}},
-    //     {9, {0}},
-    // };
-    //a 0
-    //b 1
-    //c 2
-    //d 3
-    //e 4
-    //f 5
-    //g 6
-    //h 7 
-    //i 8
-    //j 9
-
-    std::string filepath = parse_args(argc, argv);
-    // std::cout << filepath << std::endl;
-    readAllGraphsFromDir(filepath);
-    // solve_optimization_problem(G_example);
-
-    return 0;
 }

@@ -54,6 +54,7 @@ void runGA(Parameters params, const std::string& path) {
     int num_vertex, num_edges;
 
     file >> num_vertex >> num_edges;
+    
     vector<pair<int, int>> edges;
     edges.reserve(num_edges);
     int u, v;
