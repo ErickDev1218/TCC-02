@@ -19,6 +19,7 @@ struct Result {
     float graph_density = -1;
     int objValue = -1;
     double elapsed_time = -1;
+    bool isOptimal = false;
 };
 
 struct Parameters {
@@ -29,8 +30,8 @@ struct Parameters {
 Parameters parse_args(int argc, char* argv[]);
 void ensure_csv_header(const std::string &filename);
 void write_result_to_csv(const std::string &filename, const Result &result);
-Graph readGraphAndSolve(const std::string& path, const std::string& output);
-void solvePRD(const Graph& G);
+void readGraphAndSolve(const std::string& path, const std::string& output);
+void solvePRD(const Graph& G, Result& res);
 
 
 int main(int argc, char *argv[]) {
@@ -78,12 +79,13 @@ Parameters parse_args(int argc, char* argv[]){
     return res;
 }
 
+// Escrever no CSV se a solução é a ótima ou não
 void ensure_csv_header(const std::string &filename) {
     bool file_exists = std::filesystem::exists(filename);
     std::ofstream file;
     if (!file_exists) {
         file.open(filename);
-        file << "graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds)\n";
+        file << "graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value\n";
         file.close();
     } 
 }
@@ -91,8 +93,8 @@ void ensure_csv_header(const std::string &filename) {
 void write_result_to_csv(const std::string &filename, const Result &result) {
     std::ofstream file(filename, std::ios::app);
     file << result.graph_name << "," << result.node_count << ","
-         << result.edge_count << "," << result.graph_density << "," << result.fitness << ","
-         << result.elapsed_time << "\n"; 
+         << result.edge_count << "," << result.graph_density << "," << result.objValue << ","
+         << result.elapsed_time << "," << result.isOptimal "\n"; 
     file.close();
 }
 
@@ -297,9 +299,14 @@ void solvePRD(const Graph& G, Result& res) {
         // 6. Exibir os Resultados
         int status = model.get(GRB_IntAttr_Status);
 
+        // Escrever no CSV se a solução é a ótima ou não
         if (status == GRB_OPTIMAL || status == GRB_TIME_LIMIT) {
             res.objValue = model.get(GRB_DoubleAttr_ObjVal);
             res.elapsed_time = model.get(GRB_DoubleAttr_Runtime);
+        }
+
+        if(status == GRB_OPTIMAL){
+            res.isOptimal = true;
         }
 
     } catch (GRBException e) {
