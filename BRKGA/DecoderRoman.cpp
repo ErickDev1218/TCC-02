@@ -1,6 +1,7 @@
 
 #include "DecoderRoman.h"
 #include <numeric>
+#define DEBUG 1
 
 /**
  * @brief Esta função recebe como entrada:
@@ -81,6 +82,29 @@ int getLabel(double v){
     }
 }
 
+void checkPRD(const Graph g, const std::vector<int> f){
+    int n = g.getOrder();
+    for(int u = 0; u < n; u++){
+        if(f[u] == 0){
+            int count = 0;
+            for(int v : g.getNeighbors(u)){
+                if(f[v] == 2){
+                    count++;
+                }
+                if(count >= 2){
+                    std::cout << "Not feasible" << std::endl;
+                    return;
+                }
+            }
+            if(count == 0){
+                std::cout << "Not feasible" << std::endl;
+                return;
+            }
+        }
+    }
+    std::cout << "Is fiasable" << std::endl;
+}
+
 /**
  * @brief decoder
  */
@@ -140,6 +164,9 @@ double DecoderRoman::decode(std::vector< double >& chromosome) const {
         }
     }
     reduceWeight(g, chromosome, f, dominanceNumber);
+    #if DEBUG
+    checkPRD(g, f);
+    #endif
     // 4. Calcula custo total
     double cost = 0.0;
     for(int v = 0; v < n; ++v) {

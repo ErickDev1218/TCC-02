@@ -13,8 +13,8 @@ NUMBER_INDEPENDENT_POPULATIONS=2
 NUMBER_OF_THREADS=2
 INTERVAL_EXCHANGE_BEST=100
 NUMBER_OF_EXCHANGED_INDIVIDUALS=2
-MAX_GENS=1000
-MAX_STAGNANT=400
+MAX_GENS=100
+MAX_STAGNANT=40
 TRIALS=5
 
 
@@ -81,7 +81,7 @@ for entry in "${sorted_files[@]}"; do
 
 
   # Executar o algoritmo com os parâmetros especificados
-  ./brkga-roman/brkga-roman "$graph_file" \
+  ./brkga-roman "$graph_file" \
     --p "$POP_SIZE" \
     --pe "$ELITE_FRACTION" \
     --pm "$MUTATION_FRACTION" \

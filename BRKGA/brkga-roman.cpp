@@ -50,10 +50,10 @@ int main(int argc, char *argv[]) {
 
 	ensure_csv_header(parameters.output_file);
 
-	// std::string filename(parameters.file_path);
+	std::string filename(parameters.file_path);
 
 
-	Graph g("../Graph-base/Coleta-das-Bases/Harwell-Boeing/base_final");
+	Graph g(filename);
 
 	parameters.n = g.getOrder();
 
