@@ -15,16 +15,16 @@ CFLAGS= -std=c++17 -O3 -fopenmp -Wextra -Wall -pedantic -Woverloaded-virtual -Wc
 #CFLAGS= -DRANGECHECK -Wextra -Wall -Weffc++ -ansi -pedantic -Woverloaded-virtual -Wcast-align -Wpointer-arith
 
 # Objects:
-OBJECTS= Population.o DecoderRoman.o Graph.o brkga-roman.o
+OBJECTS= Population.o DecoderRoman.o Graph.o brkga-perfect-roman.o
 
 # Targets:
-all: brkga-roman
+all: brkga-perfect-roman
 
-brkga-roman: $(OBJECTS)
-	$(CPP) $(CFLAGS) $(OBJECTS) -o brkga-roman
+brkga-perfect-roman: $(OBJECTS)
+	$(CPP) $(CFLAGS) $(OBJECTS) -o brkga-perfect-roman
 
-brkga-roman.o:
-	$(CPP) $(CFLAGS) -c brkga-roman.cpp
+brkga-perfect-roman.o:
+	$(CPP) $(CFLAGS) -c brkga-perfect-roman.cpp
 
 DecoderRoman.o:
 	$(CPP) $(CFLAGS) -c DecoderRoman.cpp

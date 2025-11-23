@@ -1,7 +1,7 @@
 
 #include "DecoderRoman.h"
 #include <numeric>
-#define DEBUG 1
+#define DEBUG 0
 
 /**
  * @brief Esta função recebe como entrada:
@@ -131,6 +131,7 @@ double DecoderRoman::decode(std::vector< double >& chromosome) const {
             }
         }
     }
+
     // 2. Verificar se é uma solucao viavel e corrije quando nao for
     for(int v = 0; v < n; v++){
         // Olhando apenas para os vertices com rotulo 0 sub ou sobredominados
@@ -163,7 +164,9 @@ double DecoderRoman::decode(std::vector< double >& chromosome) const {
             }
         }
     }
+
     reduceWeight(g, chromosome, f, dominanceNumber);
+
     #if DEBUG
     checkPRD(g, f);
     #endif

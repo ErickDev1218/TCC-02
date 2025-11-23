@@ -3,7 +3,7 @@
 # Diretórios
 # A array com todos os diretórios de ENTRADA
 INPUT_DIRS=(
-    "../Graph-base/Coleta-das-Bases/Harwell-Boeing/base_final"
+    "../Graph-base/Coleta-das-Bases/DIMACS/base_final"
     # "../Graph-base/Coleta-das-Bases/DIMACS/base_final"
     # "../Graph-base/Coleta-das-Bases/Grafo-aleatorio/base_final"
 )

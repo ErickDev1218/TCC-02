@@ -1,5 +1,7 @@
 #include "Graph.h"
 
+#define DEBUG 0
+
 Graph::Graph(const std::string& filename) {
 	
     std::ifstream file(filename);
@@ -8,25 +10,13 @@ Graph::Graph(const std::string& filename) {
         throw std::runtime_error("Error opening the file!" + filename);
     }
 
-    std::string line {};
-    std::getline(file,line);
-    std::stringstream firstLine(line);
-
     int num_vertex, num_edges; 
-    firstLine >> num_vertex >> num_edges; // Descarta a primeira linha
-    std::cout << num_vertex << " aqui " << num_edges << std::endl;
+    file >> num_vertex >> num_edges; // primeira linha
+    for(int i = 0; i < num_vertex; i++) addVertex(i);
 
-    size_t source {0}, destination {0};
-    
-    while (std::getline(file, line)) {
-        std::stringstream ssEdges(line);
-        if (ssEdges >> source >> destination) {
-                std::cout << source << " AOBA " << destination << std::endl; 
-                addVertex(source);
-                addVertex(destination);
-                addEdge(source, destination);
-        }
-        
+    int u, v;
+    while(file >> u >> v){
+        addEdge(u, v);
     }
     
     file.close();
