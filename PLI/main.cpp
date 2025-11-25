@@ -209,7 +209,7 @@ void solvePRD(const Graph& G, Result& res) {
 
             // Passo B: Calcular o produto das duas variáveis binárias: (1 - x_v)*(1 - y_v)
             // O Gurobi aceita o produto de variáveis GRBVar * GRBVar, resultando em GRBQuadExpr
-            GRBQuadExpr product_xy = (1 - x_vars[v]) * (1 - y_vars[v]);
+            // GRBQuadExpr product_xy = (1 - x_vars[v]) * (1 - y_vars[v]);
 
             // Passo C: Calcular o produto do termo quadrático pelo termo linear
             // OBS: O Gurobi C++ não permite a multiplicação direta de GRBQuadExpr * GRBLinExpr

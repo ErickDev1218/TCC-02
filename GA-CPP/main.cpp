@@ -3,10 +3,17 @@
 #include <fstream>
 #include <filesystem>
 
+#define IRACE 1
+
 namespace fs = std::filesystem;
 using namespace std;
 
 struct Parameters {
+
+    #if IRACE
+    long unsigned iraceSeed = 0;
+    #endif
+
     int maxStagnant = 350;
     int generations = 500;
     int tournamentSize = 5;
@@ -36,7 +43,11 @@ void runGA(Parameters params, const std::string& path);
 
 int main(int argc, char *argv[]){
     Parameters params = parse_args(argc, argv);
+
+    #if !IRACE
     ensure_csv_header(params.output_file);
+    #endif
+
     runGA(params, params.file_path);
     
     return 0;
@@ -85,7 +96,13 @@ void runGA(Parameters params, const std::string& path) {
         res.graph_name = GA->g->graphName;
         res.fitness = GA->bestFitness;
 
+        #if !IRACE
         write_result_to_csv(params.output_file, res);
+        #endif
+
+        #if IRACE
+        cout << GA->bestFitness << endl;
+        #endif
 
         delete GA;
     }
@@ -139,7 +156,7 @@ Parameters parse_args(int argc, char *argv[]) {
                   << "  --crossover VALUE\n"
                   << "  --stagnation VALUE\n"
                   << "  --generations VALUE\n"
-                  << "  --population VALUE\n"
+                  << "  --populationFactor VALUE\n"
                   << "  --tournament VALUE\n"
                   << "  --elitism VALUE\n"
                   << "  --mutation VALUE\n"
@@ -148,6 +165,7 @@ Parameters parse_args(int argc, char *argv[]) {
         exit(1);
       }
 
+    #if !IRACE
     parameters.file_path = argv[1];
 
     for (int i = 2; i < argc; i++) {
@@ -161,7 +179,7 @@ Parameters parse_args(int argc, char *argv[]) {
         } else if (arg == "--generations" && i + 1 < argc) {
             parameters.generations = std::stoi(argv[++i]);
 
-        } else if (arg == "--population" && i + 1 < argc) {
+        } else if (arg == "--populationFactor" && i + 1 < argc) {
             parameters.populationFactor = std::stoi(argv[++i]);
 
         } else if (arg == "--tournament" && i + 1 < argc) {
@@ -184,6 +202,50 @@ Parameters parse_args(int argc, char *argv[]) {
             exit(1);
         }
     }
+
+    #endif
+
+    #if IRACE
+
+    parameters.iraceSeed = std::stoul(argv[3]);         // seed for random number generator 
+    parameters.file_path = argv[4];                     // path for instance
+    
+    for (int i = 5; i < argc; i++) {
+        std::string arg = argv[i];
+        if (arg == "--crossover" && i + 1 < argc) {
+            parameters.crossoverRate = std::stof(argv[++i]);
+
+        } else if (arg == "--stagnation" && i + 1 < argc) {
+            parameters.maxStagnant = std::stoi(argv[++i]);
+
+        } else if (arg == "--generations" && i + 1 < argc) {
+            parameters.generations = std::stoi(argv[++i]);
+
+        } else if (arg == "--populationFactor" && i + 1 < argc) {
+            parameters.populationFactor = std::stoi(argv[++i]);
+
+        } else if (arg == "--tournament" && i + 1 < argc) {
+            parameters.tournamentSize = std::stoi(argv[++i]);
+
+        } else if (arg == "--elitism" && i + 1 < argc) {
+            parameters.elitismRate = std::stof(argv[++i]);
+
+        } else if (arg == "--mutation" && i + 1 < argc) {
+            parameters.mutationRate = std::stof(argv[++i]);
+
+        } else if (arg == "--output" && i + 1 < argc) {
+            parameters.output_file = argv[++i];
+
+        } else if (arg == "--trials" && i + 1 < argc) {
+            parameters.trials = std::stoi(argv[++i]);
+
+        } else {
+            std::cerr << "Unknown argument: " << arg << std::endl;
+            exit(1);
+        }
+    }
+
+    #endif
 
     return parameters;
 }
