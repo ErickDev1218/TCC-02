@@ -8,7 +8,7 @@ LIB = -L$(GUROBI_HOME)/lib
 
 # Flags de compilação
 CXXFLAGS = $(INCLUDE)
-LDFLAGS = $(LIB) -lgurobi_c++ -lgurobi120
+LDFLAGS = $(LIB) -lgurobi_c++ -lgurobi110
 
 # Nome do executável
 TARGET = main

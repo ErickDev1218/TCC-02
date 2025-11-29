@@ -94,7 +94,7 @@ void write_result_to_csv(const std::string &filename, const Result &result) {
     std::ofstream file(filename, std::ios::app);
     file << result.graph_name << "," << result.node_count << ","
          << result.edge_count << "," << result.graph_density << "," << result.objValue << ","
-         << result.elapsed_time << "," << result.isOptimal "\n"; 
+         << result.elapsed_time << "," << result.isOptimal << "\n"; 
     file.close();
 }
 

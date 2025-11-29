@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+flat1000_50_0,1000,245000,0.49049,471,900.118,0

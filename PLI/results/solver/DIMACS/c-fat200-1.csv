@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+c-fat200-1,200,1534,0.0770854,29,1.50256,1

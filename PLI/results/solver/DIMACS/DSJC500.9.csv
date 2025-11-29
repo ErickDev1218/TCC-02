@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+DSJC500.9,500,112437,0.901299,30,286.284,1

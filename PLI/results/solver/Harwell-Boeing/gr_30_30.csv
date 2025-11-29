@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+gr_30_30,900,3422,0.00845878,200,0.144444,1

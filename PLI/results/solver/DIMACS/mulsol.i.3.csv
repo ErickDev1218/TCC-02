@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+mulsol.i.3,174,3916,0.260182,4,0.0481639,1
