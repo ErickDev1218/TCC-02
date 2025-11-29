@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+lshp_778,778,2247,0.00743417,260,900.013,0

@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+sanr200_0.7,200,13868,0.696884,40,441.378,1

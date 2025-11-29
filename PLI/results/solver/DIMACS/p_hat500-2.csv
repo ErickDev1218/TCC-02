@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+p_hat500-2,500,62946,0.504577,112,900.008,0

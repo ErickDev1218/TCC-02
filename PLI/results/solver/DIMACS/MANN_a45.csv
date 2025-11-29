@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+MANN_a45,1035,533115,0.9963,5,582.661,1

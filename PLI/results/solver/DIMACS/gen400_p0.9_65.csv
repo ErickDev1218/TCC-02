@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+gen400_p0.9_65,400,71820,0.9,23,63.4858,1

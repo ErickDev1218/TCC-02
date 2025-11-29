@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+jagmesh5,1180,3285,0.00472247,409,900.012,0

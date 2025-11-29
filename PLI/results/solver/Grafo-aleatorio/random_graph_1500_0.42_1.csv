@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+random_graph_1500_0.42_1,1500,472185,0.42,861,900.05,0

@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+hamming8-2,256,31616,0.968627,10,56.3652,1

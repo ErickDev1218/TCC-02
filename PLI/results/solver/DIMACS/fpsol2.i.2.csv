@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+fpsol2.i.2,363,8691,0.132277,4,0.099957,1

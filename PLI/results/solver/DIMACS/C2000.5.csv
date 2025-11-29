@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+C2000.5,2000,999836,0.500168,1021,901.066,0

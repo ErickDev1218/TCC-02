@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+dwt__245,245,608,0.0203413,113,26.4188,1

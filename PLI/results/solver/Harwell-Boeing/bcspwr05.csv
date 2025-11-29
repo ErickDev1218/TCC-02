@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+bcspwr05,443,590,0.00602637,252,1.0561,1
