@@ -1,3 +1,5 @@
 GA/__pycache__
 GA-Numpy/src/__pycache__
 venv/
+.vscode/
+IRACE-GA/tuning/irace.Rdata

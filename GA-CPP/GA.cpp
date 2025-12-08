@@ -1,12 +1,11 @@
 #include "GA.hpp"
 #include "Solution.hpp"
 
-GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int stagnant,float mutRate, float eleSize, float crosRate, int maxGenerations) : gen(std::random_device{}()),dis(0.1, 1.0), disInt(0, 1) {
+GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int stagnant,float mutRate, float eleSize, int maxGenerations) : gen(std::random_device{}()),dis(0.1, 1.0), disInt(0, 1) {
 
     this->mutationRate = mutRate;
     this->populationSize = g->numNodes / popFactor;
     this->elitismSize = static_cast<std::size_t>(std::floor(this->populationSize * eleSize));
-    this->crossoverRate = crosRate;
     this->maxGenerations = maxGenerations;
     this->maxStagnant = stagnant;
     this->tournamentSize = tournSize;
@@ -24,14 +23,34 @@ GeneticAlgorithm::~GeneticAlgorithm(){
     population.clear();
 }
 
-void GeneticAlgorithm::gaFlow() {
+Result GeneticAlgorithm::gaFlow() {
 
     std::vector<Solution*> currentPop = this->population;
-    bestFitness = currentPop[0]->fitness;
+
+    Result res = Result(
+        this->g->graphName,
+        this->g->numNodes, 
+        this->g->numEdges,
+        static_cast<float>(2 * this->g->numNodes) / (this->g->numNodes * (this->g->numEdges - 1)),
+        std::numeric_limits<int>::max(),
+        0.0
+    );
+
+    const double TIME_LIMIT = 900.0;
+
+    auto begin = std::chrono::high_resolution_clock::now();
 
     int gen = 0;
     for(int i = 0; i < maxGenerations && gen < this->maxStagnant; i++){
 
+        auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(
+            std::chrono::high_resolution_clock::now() - begin
+        ).count();
+
+        if (elapsed > TIME_LIMIT) {
+            res.elapsed_time = elapsed;
+            return res;
+        }
         // Selection
         std::vector<std::pair<Solution*, Solution*>> select = GeneticAlgorithm::tournamentSelection(currentPop);
 
@@ -44,15 +63,20 @@ void GeneticAlgorithm::gaFlow() {
         // Elitism
         currentPop = GeneticAlgorithm::defaultElitism(currentPop, newPop);
 
-        if(currentPop[0]->fitness < bestFitness) {
-            bestFitness = currentPop[0]->fitness;
+        if(currentPop[0]->fitness < res.fitness) {
+            res.fitness = currentPop[0]->fitness;
             gen = 0;
         }else {
             gen++;
         }
     }
-    // Save the final population
+
+    auto end = std::chrono::high_resolution_clock::now();
+    res.elapsed_time = std::chrono::duration<double>(end - begin).count();
+
     this->population = currentPop;
+    
+    return res;
 }
 
 // OPERATORS

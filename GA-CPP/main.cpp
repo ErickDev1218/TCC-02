@@ -1,5 +1,4 @@
 #include "GA.hpp"
-#include <chrono>
 #include <fstream>
 #include <filesystem>
 
@@ -26,14 +25,14 @@ struct Parameters {
     std::string output_file = "results.csv";
 };
 
-struct Result {
-    std::string graph_name;
-    int node_count;
-    int edge_count;
-    float graph_density;
-    int fitness;
-    double elapsed_time;
-};
+// struct Result {
+//     std::string graph_name;
+//     int node_count;
+//     int edge_count;
+//     float graph_density;
+//     int fitness;
+//     double elapsed_time;
+// };
 
 Parameters parse_args(int argc, char *argv[]);
 void printParameters(const Parameters& p);
@@ -55,8 +54,6 @@ int main(int argc, char *argv[]){
 
 void runGA(Parameters params, const std::string& path) {
 
-    Result res;
-
     std::ifstream file(path);
     if (!file.is_open()) {
         throw std::runtime_error("Error opening file: " + path);
@@ -73,35 +70,35 @@ void runGA(Parameters params, const std::string& path) {
         edges.push_back(make_pair(u,v));
     }
     
-    Graph* g = new Graph(num_vertex, edges, fs::path (path).stem().string());
+    Graph* g = new Graph(num_vertex, num_edges, edges, fs::path (path).stem().string());
     
     file.close();
     
     for(int trial = 0; trial < params.trials; trial++){
         
         
-        GeneticAlgorithm* GA = new GeneticAlgorithm(g, params.populationFactor, params.tournamentSize, params.maxStagnant, params.mutationRate, params.elitismRate, params.crossoverRate, params.generations);
+        GeneticAlgorithm* GA = new GeneticAlgorithm(g, params.populationFactor, params.tournamentSize, params.maxStagnant, params.mutationRate, params.elitismRate, params.generations);
     
-        auto begin = std::chrono::high_resolution_clock::now();
+        // auto begin = std::chrono::high_resolution_clock::now();
     
-        GA->gaFlow();
+        Result res = GA->gaFlow();
     
-        auto end = std::chrono::high_resolution_clock::now();
-        auto elapsed_time = std::chrono::duration<double>(end - begin);
+        // auto end = std::chrono::high_resolution_clock::now();
+        // auto elapsed_time = std::chrono::duration<double>(end - begin);
     
-        res.node_count = num_vertex;
-        res.edge_count = num_edges;
-        res.elapsed_time = elapsed_time.count();
-        res.graph_density = static_cast<float>(2 * num_edges) / (num_vertex * (num_vertex - 1));
-        res.graph_name = GA->g->graphName;
-        res.fitness = GA->bestFitness;
+        // res.node_count = num_vertex;
+        // res.edge_count = num_edges;
+        // res.elapsed_time = elapsed_time.count();
+        // res.graph_density = static_cast<float>(2 * num_edges) / (num_vertex * (num_vertex - 1));
+        // res.graph_name = GA->g->graphName;
+        // res.fitness = GA->bestFitness;
 
         #if !IRACE
         write_result_to_csv(params.output_file, res);
         #endif
 
         #if IRACE
-        cout << GA->bestFitness << endl;
+        cout << res.fitness << endl;
         #endif
 
         delete GA;
@@ -139,7 +136,6 @@ void printParameters(const Parameters& p) {
     std::cout << std::setw(20) << "Generations:"      << p.generations     << "\n";
     std::cout << std::setw(20) << "Max stagnant:"     << p.maxStagnant     << "\n";
     std::cout << std::setw(20) << "Tournament size:"  << p.tournamentSize  << "\n";
-    std::cout << std::setw(20) << "Crossover rate:"   << p.crossoverRate   << "\n";
     std::cout << std::setw(20) << "Population factor:"<< p.populationFactor<< "\n";
     std::cout << std::setw(20) << "Elitism rate:"     << p.elitismRate     << "\n";
     std::cout << std::setw(20) << "Mutation rate:"    << p.mutationRate    << "\n";
@@ -170,10 +166,7 @@ Parameters parse_args(int argc, char *argv[]) {
 
     for (int i = 2; i < argc; i++) {
         std::string arg = argv[i];
-        if (arg == "--crossover" && i + 1 < argc) {
-            parameters.crossoverRate = std::stof(argv[++i]);
-
-        } else if (arg == "--stagnation" && i + 1 < argc) {
+        if (arg == "--stagnation" && i + 1 < argc) {
             parameters.maxStagnant = std::stoi(argv[++i]);
 
         } else if (arg == "--generations" && i + 1 < argc) {
@@ -212,10 +205,7 @@ Parameters parse_args(int argc, char *argv[]) {
     
     for (int i = 5; i < argc; i++) {
         std::string arg = argv[i];
-        if (arg == "--crossover" && i + 1 < argc) {
-            parameters.crossoverRate = std::stof(argv[++i]);
-
-        } else if (arg == "--stagnation" && i + 1 < argc) {
+        if (arg == "--stagnation" && i + 1 < argc) {
             parameters.maxStagnant = std::stoi(argv[++i]);
 
         } else if (arg == "--generations" && i + 1 < argc) {

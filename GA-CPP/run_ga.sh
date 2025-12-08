@@ -4,21 +4,21 @@
 # A array com todos os diretórios de ENTRADA
 INPUT_DIRS=(
     "../Graph-base/Coleta-das-Bases/DIMACS/base_final"
-    # "../Graph-base/Coleta-das-Bases/DIMACS/base_final"
-    # "../Graph-base/Coleta-das-Bases/Grafo-aleatorio/base_final"
+    "../Graph-base/Coleta-das-Bases/Harwell-Boeing/base_final"
+    "../Graph-base/Coleta-das-Bases/Grafo-aleatorio/base_final"
 )
+
 # O diretório RAIZ para todos os resultados
 ROOT_OUTPUT_DIR="results/ga-cpp"
 
 
-POP_FACTOR=1
-CROSS=10
-STAG=100
-MAX_GENS=5
-TOURNAMENT=10
-ELIT=0.4
-MUT=1
-TRIALS=5
+POP_FACTOR=9
+STAG=500
+MAX_GENS=2000
+TOURNAMENT=3
+ELIT=0.3
+MUT=0.2
+TRIALS=30
 
 EXECUTABLE="./main"
 
@@ -137,8 +137,7 @@ for INPUT_DIR in "${INPUT_DIRS[@]}"; do
         # Executar o algoritmo com os parâmetros especificados
         # 🚨 CORREÇÃO: Usar o EXECUTABLE e os parâmetros corretos para o seu novo algoritmo (ga-cpp)
         "$EXECUTABLE" "$graph_file" \
-            --population "$POP_FACTOR" \
-            --crossover "$CROSS" \
+            --populationFactor "$POP_FACTOR" \
             --stagnation "$STAG" \
             --generations "$MAX_GENS" \
             --tournament "$TOURNAMENT" \

@@ -25,6 +25,8 @@
 ## relative to current directory. If no `trainInstancesFiles` is provided, all
 ## the files in `trainInstancesDir` will be listed as instances.
 trainInstancesDir = "../../Graph-base/Coleta-das-bases/IRACE_graphs"
+# trainInstancesDir = "/mnt/c/Users/Erick\ Freitas/Desktop/8-semestre/TCC-02/Graph-base/Coleta-das-bases/IRACE_graphs"
+
 
 ## File that contains a list of training instances and optionally additional
 ## parameters for them. If `trainInstancesDir` is provided, `irace` will
@@ -139,7 +141,7 @@ maxExperiments = 500
 
 ## Number of calls to `targetRunner` to execute in parallel. Values `0` or `1`
 ## mean no parallelization.
-# parallel = 0
+parallel = 6
 
 ## Enable/disable load-balancing when executing experiments in parallel.
 ## Load-balancing makes better use of computing resources, but increases

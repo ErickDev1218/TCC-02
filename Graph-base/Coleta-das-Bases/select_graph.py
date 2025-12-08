@@ -55,7 +55,6 @@ if __name__ == "__main__":
     BASE_PATH = Path(__file__).parent   
 
     GRAPH_PATH = [
-        (f"{BASE_PATH}/Grafo-aleatorio/base_final/", f"{BASE_PATH}/IRACE_graphs/"),
         (f"{BASE_PATH}/DIMACS/base_final/", f"{BASE_PATH}/IRACE_graphs/"),
         (f"{BASE_PATH}/Harwell-Boeing/base_final/", f"{BASE_PATH}/IRACE_graphs/")
     ]
