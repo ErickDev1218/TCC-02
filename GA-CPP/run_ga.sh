@@ -5,18 +5,18 @@
 INPUT_DIRS=(
     "../Graph-base/Coleta-das-Bases/DIMACS/base_final"
     "../Graph-base/Coleta-das-Bases/Harwell-Boeing/base_final"
-    "../Graph-base/Coleta-das-Bases/Grafo-aleatorio/base_final"
+    "../Graph-base/Coleta-das-Bases/Random_graphs/base_final"
 )
 
 # O diretório RAIZ para todos os resultados
 ROOT_OUTPUT_DIR="results/ga-cpp"
 
 
-POP_FACTOR=9
-STAG=500
-MAX_GENS=2000
+POP_FACTOR=5
+STAG=200
+MAX_GENS=1200
 TOURNAMENT=3
-ELIT=0.3
+ELIT=0.4
 MUT=0.2
 TRIALS=30
 
