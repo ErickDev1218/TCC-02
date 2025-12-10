@@ -48,7 +48,8 @@ Result GeneticAlgorithm::gaFlow() {
         ).count();
 
         if (elapsed > TIME_LIMIT) {
-            res.elapsed_time = elapsed;
+            res.elapsed_time = TIME_LIMIT;
+            this->population = currentPop;
             return res;
         }
         // Selection

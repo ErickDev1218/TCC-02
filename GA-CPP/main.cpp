@@ -2,7 +2,7 @@
 #include <fstream>
 #include <filesystem>
 
-#define IRACE 0
+#define IRACE 1
 
 namespace fs = std::filesystem;
 using namespace std;
@@ -16,7 +16,7 @@ struct Parameters {
     int maxStagnant = 350;
     int generations = 500;
     int tournamentSize = 5;
-    int trials = 5;
+    int trials = 1;
     float crossoverRate = 0.5;
     float populationFactor = 3;
     float elitismRate = 0.1;
