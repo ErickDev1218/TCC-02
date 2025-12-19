@@ -11,6 +11,9 @@ INPUT_DIRS=(
 # O diretório RAIZ para todos os resultados
 ROOT_OUTPUT_DIR="results/ga-cpp"
 
+# Description of the best-so-far configuration:
+#    .ID. stagnation generations populationFactor tournament elitism mutation trials .PARENT.
+# 47   47        200        1200                3          4     0.4      0.2      1       29
 
 POP_FACTOR=3
 STAG=200
