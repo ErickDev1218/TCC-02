@@ -26,7 +26,6 @@ GeneticAlgorithm::~GeneticAlgorithm(){
 Result GeneticAlgorithm::gaFlow() {
 
     std::vector<Solution*> currentPop = this->population;
-
     Result res = Result(
         this->g->graphName,
         this->g->numNodes, 
@@ -85,7 +84,7 @@ Result GeneticAlgorithm::gaFlow() {
 // Selection
 std::vector<std::pair<Solution*, Solution*>> GeneticAlgorithm::tournamentSelection(std::vector<Solution*> population) {
     std::vector<std::pair<Solution*, Solution*>> selectedPairs;
-    for(int i = 0; i < population.size() / 2; i++){
+    for(int i = 0; i < std::ceil(population.size()) / 2; i++){
         std::vector<Solution*> auxiliary = population;
         
         // Embaralha o vetor
@@ -106,7 +105,10 @@ std::vector<Solution*> GeneticAlgorithm::onePointCrossover(std::vector<std::pair
 
     std::vector<Solution*> result;
 
-    for(std::pair<Solution*, Solution*> pair : pop){
+    for(int i = 0; i < pop.size(); i++){
+
+        std::pair<Solution*, Solution*> pair = pop[i];
+
         Solution* dad = pair.first;
         Solution* mom = pair.second;
         
@@ -125,8 +127,22 @@ std::vector<Solution*> GeneticAlgorithm::onePointCrossover(std::vector<std::pair
             firstChild.push_back(mom->solution[i]);
             secondChild.push_back(dad->solution[i]);
         }
-        result.push_back(new Solution(firstChild, this->prd));
-        result.push_back(new Solution(secondChild, this->prd));
+
+        if(this->populationSize % 2 == 1 && i+1 == pop.size()){
+            Solution* f = new Solution(firstChild, this->prd);
+            Solution* s = new Solution(secondChild, this->prd);
+
+            if(f->fitness < s->fitness){
+                result.push_back(f);
+                delete s;
+            }else{
+                result.push_back(s);
+                delete f;
+            }
+        }else{
+            result.push_back(new Solution(firstChild, this->prd));
+            result.push_back(new Solution(secondChild, this->prd));
+        }
     }
     return result;
 }
@@ -158,15 +174,14 @@ std::vector<Solution*> GeneticAlgorithm::defaultElitism(std::vector<Solution*>& 
     // Sort the solution vectors
     std::sort(current.begin(), current.end(), [](Solution* a, Solution* b) { return *a < *b;}); 
     std::sort(newPop.begin(), newPop.end(), [](Solution* a, Solution* b) { return *a < *b;});
-    
-    // Copy the best features from the previous generation and free up the rest of memory.
+
     for(int i = 0; i < current.size(); i++){ 
-        if(i < this->elitismSize){
-            result.push_back(current[i]); 
-        }else{
-            delete current[i];
+            if(i < this->elitismSize){
+                result.push_back(current[i]); 
+            }else{
+                delete current[i];
+            }
         }
-    } 
     
     // Copy the best features from this generagtion and free up the rest of memory.
     int res = newPop.size() - this->elitismSize;
@@ -207,7 +222,7 @@ Solution* GeneticAlgorithm::changeSolution(Solution* element){
 std::vector<Solution*> GeneticAlgorithm::initializePopulation(){
 
     // Call randomized initialization to get a half of population
-    std::vector<Solution*> aux = this->prd->randomizedInitialization();
+    std::vector<Solution*> aux = this->prd->randomizedInitialization(this->populationSize);
     // Call greedy initialization to get +1 solution, probabily the best solution in this population
     aux.push_back(this->prd->greedyInitialization());
     // Rest of population will be generated for randomizedSolution function

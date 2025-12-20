@@ -21,7 +21,7 @@ class PRD {
         Solution* randomSolution();
         void fixSolution(Solution* s);
         void reduceWeight(Solution* s); 
-        std::vector<Solution*> randomizedInitialization();
+        std::vector<Solution*> randomizedInitialization(int populationSize);
         
     private:
         void resetGraph(std::vector<int> s);

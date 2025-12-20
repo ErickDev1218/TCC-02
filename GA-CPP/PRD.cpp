@@ -86,7 +86,7 @@ Solution* PRD::greedyInitialization() {
     return new Solution(this->graph->getLabels(), this);
 }
 
-std::vector<Solution*> PRD::randomizedInitialization() {
+std::vector<Solution*> PRD::randomizedInitialization(int populationSize) {
 
     int numVertex = this->graph->numNodes;
 
@@ -100,61 +100,38 @@ std::vector<Solution*> PRD::randomizedInitialization() {
     final.reserve(numVertex / 2);
 
     // Create only the half
-    for (int i = 0; i < numVertex / 2; ++i) {
+    for (int i = 0; i < populationSize / 2; ++i) {
         this->restartGraph();
 
         Node* v = this->graph->nodes[indices[i]];
-        if (v->label == -1 && !v->isDominated) {
-            // Check if that vertex its isolated
-            if (v->neighborhood.empty()) {
-                v->label = 1;
-                v->isDominated = true;
-                v->dominatedFor++;
-                continue;
-            } else {
-                v->label = 2;
-                v->isDominated = true;
-                v->dominatedFor++;
 
-                // Fix the neighborhood
-                for (Node* neighbor : v->neighborhood) {
-                    if (neighbor->label == -1 && !neighbor->isDominated) {
-                        neighbor->label = 0;
-                        neighbor->isDominated = true;
-                        neighbor->dominatedFor++;
-                        for (Node* neighbor2 : neighbor->neighborhood) {
-                            if (neighbor2->label == -1 && !neighbor2->isDominated) {
-                                neighbor2->label = 0;
-                            }
+        if(!v->isDominated && v->neighborhood.empty()){
+            v->label = 1;
+            v->isDominated = true;
+            v->dominatedFor++;
+        }else if(!v->isDominated){
+            v->label = 2;
+            v->isDominated = true;
+            v->dominatedFor++;
+
+            for(Node* w : v->neighborhood){
+                if(!w->isDominated){
+                    w->label = 0;
+                    w->isDominated = true;
+                    w->dominatedFor++;
+
+                    for(Node* u : w->neighborhood){
+                        if(!u->isDominated){
+                            u->label = 1;
+                            u->isDominated = true;
+                            u->dominatedFor++;
                         }
                     }
                 }
             }
         }
-
-        // Mark as dominated every vertex with label = 0 that have a neighbor with label = 2
-        for (Node* node : this->graph->nodes) {
-            if (node->label == 0 && !node->isDominated) {
-                for (Node* neighbor : node->neighborhood) {
-                    if (neighbor->label == 2) {
-                        node->isDominated = true;
-                        node->dominatedFor++;
-                        break;
-                    }
-                }
-            }
-        }
-
-        // Fix vertex remaining with label = -1 or 0 and not dominated
-        for (Node* node : this->graph->nodes) {
-            if ((node->label == -1 || node->label == 0) && !node->isDominated) {
-                node->label = 1;
-                node->isDominated = true;
-                node->dominatedFor++;
-            }
-        }
-
-        final.push_back( new Solution(this->graph->getLabels(), this) );
+        Solution* f = new Solution(this->graph->getLabels(), this);
+        final.push_back(f);
     }
 
     return final;
