@@ -2,9 +2,9 @@ import os
 import csv
 
 # pasta onde estão os arquivos .txt
-input_folder = "/home/fox/GitHub-Temporario/TCC-02/Graph-base/Coleta-das-Bases/Harwell-Boeing/base_final"
+input_folder = "/Users/erickdev1218/Desktop/Repositorios/TCC-02/Graph-base/Coleta-das-Bases/Harwell-Boeing/base_final"
 
-output_csv = "resumo_grafos_harwell.csv"
+output_csv = "/Users/erickdev1218/Desktop/Repositorios/TCC-02/Graph-base/Coleta-das-Bases/Harwell-Boeing/resumo_grafos_harwell_boeing.csv"
 
 results = []
 

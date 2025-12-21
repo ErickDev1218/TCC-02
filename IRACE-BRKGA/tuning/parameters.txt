@@ -1,0 +1,47 @@
+## Template for parameter description file for Iterated Race.
+## subindo git
+## The format is one parameter per line. Each line contains:
+##
+## 1: Name of the parameter. An unquoted alphanumeric string,
+##    example: ants
+
+## 2: Switch to pass the parameter. A quoted (possibly empty) string, 
+##    if the value and the switch must be separated, add a space at
+##    the end of the string. Example : "--version1 --ants "
+
+## 3: Type. An unquoted single letter, among 
+##     i: Integer, c: categorical, o: ordinal, r: real.
+
+## 4: For c and o: All possible values, that is, a variable number of
+##    quoted or unquoted strings separated by commas within
+##    parenthesis. Empty strings and strings containing commas or
+##    spaces must be quoted.
+##    For i,r: a pair of unquoted numbers representing minimum and
+##    maximum values. 
+
+## 5: A conditional parameter can be defined according to the values of
+##    one or several other parameters.  This is done by adding a
+##    character '|' followed by an R expression involving the names of
+##    other parameters. This expression must return TRUE if the 
+##    condition is satisfied, FALSE otherwise.
+
+
+# 1:            2:                   3:     4:      5:
+population_factor  "--population_factor " i   (4,10)
+pe "--pe " r  (0.1, 0.4)
+pm  "--pm " r (0.1, 0.4)
+rhoe  "--rhoe " r   (0.6, 0.9)
+K     "--K "    c   (1, 2, 3)
+MAXT    "--MAXT "   i   (1, 5)
+X_INTVL      "--X_INTVL "     c   (50, 100, 150)
+X_NUMBER      "--X_NUMBER "     i   (2, 5)
+MAX_GENS      "--MAX_GENS "     c   (500, 700, 900, 1000, 1200)
+MAX_STAGT      "--MAX_STAGT "     c   (200, 300, 400)
+trials      "--trials "     c   (1)
+
+
+[forbidden]
+# mode == "x1" & mutation == "low"
+
+[global]
+digits = 1 # Maximum number of decimal places that are significant for numerical (real) parameters.

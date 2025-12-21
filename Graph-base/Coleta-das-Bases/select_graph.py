@@ -2,6 +2,7 @@ import os
 import shutil
 from pathlib import Path
 import math
+import random
 
 def ordenar_e_copiar_txt(input_dir, output_dir):
     input_path = Path(input_dir)
@@ -25,10 +26,12 @@ def ordenar_e_copiar_txt(input_dir, output_dir):
         arquivos_com_linhas.append((arquivo, num_linhas))
 
     # Ordena pela quantidade de linhas (desc)
-    arquivos_ordenados = sorted(arquivos_com_linhas, key=lambda x: x[1], reverse=True)
+    arquivos_shuffle = arquivos_com_linhas.copy()
+    random.shuffle(arquivos_shuffle)
+    # arquivos_ordenados = sorted(arquivos_com_linhas, key=lambda x: x[1], reverse=True)
 
     # Seleciona os top 30%
-    selecionados = arquivos_ordenados[:amount]
+    selecionados = arquivos_shuffle[:amount]
 
     # Copia arquivos
     for arquivo, _ in selecionados:

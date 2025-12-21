@@ -1,12 +1,19 @@
 # Compiler binary:
-CPP= g++
+UNAME_S:=$(shell uname -s)
+
+ifeq ($(UNAME_S), Darwin)
+	CXX=g++-15
+else
+	CXX=g++
+endif
+
 
 # Recommended compiler flags for speed:
 #	OpenMP enabled
 #	full binary code optimization
 #	full error and warning reports
 #	no range checking within BRKGA:
-CFLAGS= -std=c++17 -O3 -fopenmp -Wextra -Wall -pedantic -Woverloaded-virtual -Wcast-align -Wpointer-arith
+CFLAGS= -std=c++17 -O3 -Wextra -Wall -pedantic -Woverloaded-virtual -Wcast-align -Wpointer-arith
 
 # Compiler flags for debugging; uncomment if needed:
 #	range checking enabled in the BRKGA API
@@ -21,19 +28,19 @@ OBJECTS= Population.o DecoderRoman.o Graph.o brkga-perfect-roman.o
 all: brkga-perfect-roman
 
 brkga-perfect-roman: $(OBJECTS)
-	$(CPP) $(CFLAGS) $(OBJECTS) -o brkga-perfect-roman
+	$(CXX) $(CFLAGS) $(OBJECTS) -o brkga-perfect-roman
 
 brkga-perfect-roman.o:
-	$(CPP) $(CFLAGS) -c brkga-perfect-roman.cpp
+	$(CXX) $(CFLAGS) -c brkga-perfect-roman.cpp
 
 DecoderRoman.o:
-	$(CPP) $(CFLAGS) -c DecoderRoman.cpp
+	$(CXX) $(CFLAGS) -c DecoderRoman.cpp
 
 Population.o:
-	$(CPP) $(CFLAGS) -c brkgaAPI/Population.cpp
+	$(CXX) $(CFLAGS) -c brkgaAPI/Population.cpp
 
 Graph.o:
-	$(CPP) $(CFLAGS) -c Graph.cpp
+	$(CXX) $(CFLAGS) -c Graph.cpp
 
 clean:
 	rm -f api-usage $(OBJECTS)

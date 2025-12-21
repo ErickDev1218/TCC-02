@@ -10,7 +10,7 @@
 #include "DecoderRoman.h"
 #include "Graph.h"
 
-#define DEBUG 1
+#define DEBUG 0
 #define IRACE 0
 
 struct AlgorithmParameters {
@@ -18,7 +18,7 @@ struct AlgorithmParameters {
 	std::string output_file = "results.csv";
 
 	unsigned n = 10;		    // size of chromosomes
-	unsigned p = 100;		    // size of population
+	unsigned population_factor = 100;		    // size of population
 	double pe = 0.20;		    // fraction of population to be the elite-set
 	double pm = 0.10;		    // fraction of population to be replaced by mutants
 	double rhoe = 0.70;	        // probability that offspring inherit an allele from elite parent
@@ -70,8 +70,8 @@ int main(int argc, char *argv[]) {
 		const long unsigned rngSeed = trial;	// seed to the random number generator
 		MTRand rng((rngSeed + 1) * 1234);	    // initialize the random number generator
 
-        unsigned pop_size = static_cast<unsigned>(floor((float)parameters.n / parameters.p));
-
+        unsigned pop_size = parameters.n / parameters.population_factor;
+        
 		// initialize the BRKGA-based heuristic
 		BRKGA<DecoderRoman, MTRand> algorithm(parameters.n, pop_size, parameters.pe, 
 			parameters.pm, parameters.rhoe, decoder, rng, parameters.K, parameters.MAXT);
@@ -154,7 +154,7 @@ AlgorithmParameters parse_args(int argc, char *argv[]) {
     if (argc < 2) {
         std::cerr << "Usage: " << argv[0] << " <graph_file> [options]\n"
                   << "Options:\n"
-                  << "  --p VALUE\n"
+                  << "  --population_factor VALUE\n"
                   << "  --pe VALUE\n"
                   << "  --pm VALUE\n"
                   << "  --rhoe VALUE\n"
@@ -170,12 +170,13 @@ AlgorithmParameters parse_args(int argc, char *argv[]) {
         exit(1);
       }
 
+    #if !IRACE
     parameters.file_path = argv[1];
 
     for (int i{2}; i < argc; i++) {
         std::string arg = argv[i];
-        if (arg == "--p" && i + 1 < argc) {
-            parameters.p = std::stoul(argv[++i]);
+        if (arg == "--population_factor" && i + 1 < argc) {
+            parameters.population_factor = std::stoul(argv[++i]);
         } else if (arg == "--pe" && i + 1 < argc) {
             parameters.pe = std::stod(argv[++i]);
         } else if (arg == "--pm" && i + 1 < argc) {
@@ -196,9 +197,9 @@ AlgorithmParameters parse_args(int argc, char *argv[]) {
             parameters.MAX_STAGT = std::stoul(argv[++i]);
         } else if (arg == "--trials" && i + 1 < argc) {
             parameters.trials = std::stoul(argv[++i]);
-        // }
-        // else if (arg == "--input" && i + 1 < argc){
-        //     parameters.file_path = argv[++i];
+        }
+        else if (arg == "--input" && i + 1 < argc){
+            parameters.file_path = argv[++i];
         }else if (arg == "--output" && i + 1 < argc) {
             parameters.output_file = argv[++i];
         } else {
@@ -206,6 +207,47 @@ AlgorithmParameters parse_args(int argc, char *argv[]) {
             exit(1);
         }
     }
+
+    #endif
+
+    #if IRACE
+    parameters.file_path = argv[4];         
+
+    for (int i{5}; i < argc; i++) {
+        std::string arg = argv[i];
+        if (arg == "--population_factor" && i + 1 < argc) {
+            parameters.population_factor = std::stoul(argv[++i]);
+        } else if (arg == "--pe" && i + 1 < argc) {
+            parameters.pe = std::stod(argv[++i]);
+        } else if (arg == "--pm" && i + 1 < argc) {
+            parameters.pm = std::stod(argv[++i]);
+        } else if (arg == "--rhoe" && i + 1 < argc) {
+            parameters.rhoe = std::stod(argv[++i]);
+        } else if (arg == "--K" && i + 1 < argc) {
+            parameters.K = std::stoul(argv[++i]);
+        } else if (arg == "--MAXT" && i + 1 < argc) {
+            parameters.MAXT = std::stoul(argv[++i]);
+        } else if (arg == "--X_INTVL" && i + 1 < argc) {
+            parameters.X_INTVL = std::stoul(argv[++i]);
+        } else if (arg == "--X_NUMBER" && i + 1 < argc) {
+            parameters.X_NUMBER = std::stoul(argv[++i]);
+        } else if (arg == "--MAX_GENS" && i + 1 < argc) {
+            parameters.MAX_GENS = std::stoul(argv[++i]);
+        } else if (arg == "--MAX_STAGT" && i + 1 < argc) {
+            parameters.MAX_STAGT = std::stoul(argv[++i]);
+        } else if (arg == "--trials" && i + 1 < argc) {
+            parameters.trials = std::stoul(argv[++i]);
+        }
+        else if (arg == "--input" && i + 1 < argc){
+            parameters.file_path = argv[++i];
+        }else if (arg == "--output" && i + 1 < argc) {
+            parameters.output_file = argv[++i];
+        } else {
+            std::cerr << "Unknown argument: " << arg << std::endl;
+            exit(1);
+        }
+    }
+    #endif
 
     return parameters;
 }
