@@ -1,7 +1,8 @@
 
 #include "DecoderRoman.h"
 #include <numeric>
-#define DEBUG 0
+#include <algorithm>
+#define DEBUG 1
 
 /**
  * @brief Esta função recebe como entrada:
@@ -28,17 +29,14 @@ void change_key(std::vector< double >& chromosome, int v, int new_label) {
 
 /**
  * @brief Esta função recebe como entrada um cromossomo e tenta reduzir o peso da solução 
- * realizando algumas trocas válidas:
- * - se uv in E(G) e f(u)=2 e f(v)=1, então redefinimos o peso de v como f(v)=0.
- * - se u tem degree(u)>=2 e f(u)=1 e u tem pelo menos 2 vizinhos w com f(w)=1, então redefinimos 
- *   o peso de u como f(u)=2 e os seus vizinhos com rótulo 1 recebem rótulo 0.
+ * realizando algumas trocas válidas de acordo com a dominação romana perfeita.
  */
 void reduceWeight(const Graph& graph, std::vector< double >& chromosome, std::vector<int>& label, std::vector<int>& dominanceNumber) {
     const int n = graph.getOrder();
 
     for(int u = 0; u < n; u++){
         if(label[u] == 2){
-            // Verificar se v esta dominando alguem
+            // Verificar se u é um dominador privado de algum de seus vizinhos
             bool safe = true;
             for(int v : graph.getNeighbors(u)){
                 if(label[v] == 0 && dominanceNumber[v] == 1){
@@ -52,7 +50,7 @@ void reduceWeight(const Graph& graph, std::vector< double >& chromosome, std::ve
                 label[u] = 1;
                 change_key(chromosome, u, 1);
 
-                //Corrije seus vizinhos
+                // Corrije o dominanceNumber dos vizinhos de u
                 for(int v : graph.getNeighbors(u)){
                     dominanceNumber[v]--;
                 }
@@ -72,17 +70,23 @@ void reduceWeight(const Graph& graph, std::vector< double >& chromosome, std::ve
     }
 }
 
+/**
+ * @brief Esta função retorna o rótulo associado à chave aleatória passada como entrada
+ * 
+ * @param v chave aleatória
+ * @return int rótulo
+ */
 int getLabel(double v){
     if(v >= 0 && v < 0.33){
         return 0;
-    }else if (v >= 0.33 && v < 0.66){
+    } else if(v >= 0.33 && v < 0.66){
         return 1;
-    }else {
+    } else {
         return 2;
     }
 }
 
-void checkPRD(const Graph g, const std::vector<int> f){
+void checkPRD(const Graph& g, const std::vector<int>& f){
     int n = g.getOrder();
     for(int u = 0; u < n; u++){
         if(f[u] == 0){
@@ -92,17 +96,16 @@ void checkPRD(const Graph g, const std::vector<int> f){
                     count++;
                 }
                 if(count >= 2){
-                    std::cout << "Not feasible" << std::endl;
+                    std::cout << "======>>> Not feasible <<<=========" << std::endl;
                     return;
                 }
             }
             if(count == 0){
-                std::cout << "Not feasible" << std::endl;
+                std::cout << "======>>> Not feasible <<<=========" << std::endl;
                 return;
             }
         }
     }
-    std::cout << "Is fiasable" << std::endl;
 }
 
 /**
@@ -111,8 +114,9 @@ void checkPRD(const Graph g, const std::vector<int> f){
 double DecoderRoman::decode(std::vector< double >& chromosome) const {
 	const int n = g.getOrder();
     std::vector<int> f(n, 0); // pesos 0, 1, 2
-    std::vector<int> dominanceNumber(n, 0); // contador de quantos dominadores o vertice tem incluindo a si proprio
+    std::vector<int> dominanceNumber(n, 0); // contador de quantos dominadores o vertice tem, incluindo a si proprio
     std::vector<bool> dominated(n, false);
+
     // 1. Rotular o grafo
     for(int v = 0; v < n; v++){
         int label = getLabel(chromosome[v]); // Transforma um valor continuo em um discreto
@@ -123,7 +127,7 @@ double DecoderRoman::decode(std::vector< double >& chromosome) const {
             dominated[v] = true;
             dominanceNumber[v]++;
         }
-        // Se label == 2, ajustar a dominancia dos vizinho
+        // Se label == 2, ajustar a dominancia dos vizinhos
         if(label == 2){
             for(int u : g.getNeighbors(v)){
                 dominated[u] = true;
@@ -134,8 +138,15 @@ double DecoderRoman::decode(std::vector< double >& chromosome) const {
 
     // 2. Verificar se é uma solucao viavel e corrije quando nao for
     for(int v = 0; v < n; v++){
+        // se for um vértice isolado, recebe rótulo 1
+        if(g.getVertexDegree(v) == 0) {
+            f[v] = 1;
+            dominated[v] = true;
+            dominanceNumber[v] = 1;
+            change_key(chromosome, v, 1);
+        }
         // Olhando apenas para os vertices com rotulo 0 sub ou sobredominados
-        if(f[v] == 0 && (dominanceNumber[v] == 0 || dominanceNumber[v] >= 2)){
+        else if(f[v] == 0 && (dominanceNumber[v] == 0 || dominanceNumber[v] >= 2)){
             bool dominatedNeighbor = false;
             // Olhar a vizinhanca
             for(int u : g.getNeighbors(v)){
@@ -143,7 +154,7 @@ double DecoderRoman::decode(std::vector< double >& chromosome) const {
                     dominatedNeighbor = true;
                 }
             }
-            // 0 poder ser sobredominado ou subdominado
+            // O vértice v poder ser sobredominado ou subdominado
             // Caso seja subdominado e seus vizinhos também não forem dominados
             if(dominanceNumber[v] == 0 && !dominatedNeighbor){
                 f[v] = 2;
@@ -156,7 +167,8 @@ double DecoderRoman::decode(std::vector< double >& chromosome) const {
                     dominated[u] = true;
                     dominanceNumber[u]++;
                 }
-            }else {
+            } 
+            else {
                 f[v] = 1;
                 dominated[v] = true;
                 dominanceNumber[v]++;
@@ -170,6 +182,7 @@ double DecoderRoman::decode(std::vector< double >& chromosome) const {
     #if DEBUG
     checkPRD(g, f);
     #endif
+
     // 4. Calcula custo total
     double cost = 0.0;
     for(int v = 0; v < n; ++v) {
