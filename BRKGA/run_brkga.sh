@@ -12,17 +12,17 @@ ROOT_OUTPUT_DIR="results/brkga-cpp"
 
 
 # Parâmetros
-POP_SIZE=99
+POP_FRACTION=2
 ELITE_FRACTION=0.20
-MUTATION_FRACTION=0.10
+MUTATION_FRACTION=0.15
 RHOE=0.70
 NUMBER_INDEPENDENT_POPULATIONS=2
 NUMBER_OF_THREADS=2
 INTERVAL_EXCHANGE_BEST=98
 NUMBER_OF_EXCHANGED_INDIVIDUALS=2
-MAX_GENS=100
-MAX_STAGNANT=40
-TRIALS=5
+MAX_GENS=1000
+MAX_STAGNANT=200
+TRIALS=30
 
 EXECUTABLE="./brkga-perfect-roman"
 
@@ -141,7 +141,7 @@ for INPUT_DIR in "${INPUT_DIRS[@]}"; do
         # Executar o algoritmo com os parâmetros especificados
         # 🚨 CORREÇÃO: Usar o EXECUTABLE e os parâmetros corretos para o seu novo algoritmo (ga-cpp)
         "$EXECUTABLE" "$graph_file" \
-            --p "$POP_SIZE" \
+            --p "$POP_FRACTION" \
             --pe "$ELITE_FRACTION" \
             --pm "$MUTATION_FRACTION" \
             --rhoe "$RHOE" \

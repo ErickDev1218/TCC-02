@@ -4,13 +4,14 @@
 #include <filesystem>
 #include <chrono>
 #include <limits>
+#include <cmath>
 #include "brkgaAPI/BRKGA.h"
 #include "brkgaAPI/MTRand.h"
 #include "DecoderRoman.h"
 #include "Graph.h"
 
-#define DEBUG 0
-#define IRACE 1
+#define DEBUG 1
+#define IRACE 0
 
 struct AlgorithmParameters {
 	std::string file_path;
@@ -67,13 +68,16 @@ int main(int argc, char *argv[]) {
 		DecoderRoman decoder(g);
 
 		const long unsigned rngSeed = trial;	// seed to the random number generator
-		MTRand rng(rngSeed);				    // initialize the random number generator
+		MTRand rng((rngSeed + 1) * 1234);	    // initialize the random number generator
+
+        unsigned pop_size = static_cast<unsigned>(floor((float)parameters.n / parameters.p));
 
 		// initialize the BRKGA-based heuristic
-		BRKGA<DecoderRoman, MTRand> algorithm(parameters.n, parameters.p, parameters.pe, 
+		BRKGA<DecoderRoman, MTRand> algorithm(parameters.n, pop_size, parameters.pe, 
 			parameters.pm, parameters.rhoe, decoder, rng, parameters.K, parameters.MAXT);
 
 		#if DEBUG
+        std::cout << "Population size = " << pop_size << std::endl;
 		std::cout << "Running for " << parameters.MAX_GENS << " generations..." << std::endl;
 		#endif
 
@@ -103,8 +107,8 @@ int main(int argc, char *argv[]) {
 		} while (generation < parameters.MAX_GENS && stagnant_count < parameters.MAX_STAGT);
 
 		auto end = std::chrono::high_resolution_clock::now();
-    	auto elapsed_time = std::chrono::duration_cast<std::chrono::microseconds>(end-begin);
-
+    	//auto elapsed_time = std::chrono::duration_cast<std::chrono::seconds>(end-begin);
+        auto elapsed_time = std::chrono::duration<double>(end-begin);
 
 		std::filesystem::path input_path(parameters.file_path);
 		Result result;
@@ -123,7 +127,7 @@ int main(int argc, char *argv[]) {
         std::cout << "  number of edges: " << result.edge_count << std::endl;
         std::cout << "  graph density: " << result.graph_density << std::endl;
         std::cout << "  fitness: " << result.fitness << std::endl;
-        std::cout << "  time (microseconds): " << result.elapsed_time << std::endl;
+        std::cout << "  time (seconds): " << result.elapsed_time << std::endl;
         std::cout << std::endl;
         #endif
 
@@ -211,7 +215,7 @@ void ensure_csv_header(const std::string &filename) {
     std::ofstream file;
     if (!file_exists) {
         file.open(filename);
-        file << "graph_name,graph_order,graph_size,density,fitness_value,elapsed_time(microsecond)\n";
+        file << "graph_name,graph_order,graph_size,density,fitness_value,elapsed_time(seconds)\n";
         file.close();
     } 
 }
