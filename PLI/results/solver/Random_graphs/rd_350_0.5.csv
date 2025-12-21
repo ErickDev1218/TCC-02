@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+rd_350_0.5,350,30572,0.500565,140,900.016,0

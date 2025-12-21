@@ -1,0 +1,2 @@
+graph_name,graph_order,graph_size,density,objective_value,elapsed_time(seconds), optimal_value
+cubic_676,676,1014,0.00444444,364,900.007,0
