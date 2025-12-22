@@ -24,7 +24,7 @@ class PRD {
         std::vector<Solution*> randomizedInitialization(int populationSize);
         
     private:
-        void resetGraph(std::vector<int> s);
+        void resetGraph(std::vector<int>& s);
         void restartGraph();
 };
 

@@ -7,7 +7,7 @@ class PRD; // Circular dependency
 class Solution {
     public:
         std::vector<int> solution;
-        bool isValid;
+        //bool isValid;
         int fitness;
         
         Solution(std::vector<int> solution, PRD* prd);

@@ -1,10 +1,13 @@
+#include <cmath>
 #include "PRD.hpp"
 #include "Solution.hpp"
 
+// ok - atilio
 PRD::PRD(Graph* g) {
     this->graph = g;
 }
 
+// ok - atilio
 bool PRD::checkPRD(Solution* sol) {
     PRD::resetGraph(sol->solution); // Reset the graph
     // Check if every vertex with label 0 has
@@ -17,6 +20,7 @@ bool PRD::checkPRD(Solution* sol) {
     return true;
 }
 
+// ok atilio: corrigi uma parte do código abaixo
 Solution* PRD::greedyInitialization() {
     this->restartGraph(); // Restart the graph
 
@@ -66,9 +70,12 @@ Solution* PRD::greedyInitialization() {
             for (Node* neighbor : v->neighborhood) {
                 if (neighbor->label == -1) {
                     neighbor->label = 0;
-                    neighbor->isDominated = true;
-                    neighbor->dominatedFor++;
+                    //neighbor->isDominated = true;
+                    //neighbor->dominatedFor++;
                 }
+                //Erick, acho que independente do vizinho, ele deve ser atualizado:
+                neighbor->isDominated = true;
+                neighbor->dominatedFor++; 
             }
         }
         // Else, mark as 1
@@ -86,59 +93,20 @@ Solution* PRD::greedyInitialization() {
     return new Solution(this->graph->getLabels(), this);
 }
 
+
+// ok - atilio
 std::vector<Solution*> PRD::randomizedInitialization(int populationSize) {
-
-    int numVertex = this->graph->numNodes;
-
-    std::vector<int> indices(numVertex);
-    for (int i = 0; i < numVertex; i++) indices[i] = i;
-    std::random_device rd;
-    std::mt19937 g(rd());
-    std::shuffle(indices.begin(), indices.end(), g);
-
     std::vector<Solution*> final;
-    final.reserve(numVertex / 2);
-
+    final.reserve(populationSize); 
     // Create only the half
-    for (int i = 0; i < populationSize / 2; ++i) {
-        this->restartGraph();
-
-        Node* v = this->graph->nodes[indices[i]];
-
-        if(!v->isDominated && v->neighborhood.empty()){
-            v->label = 1;
-            v->isDominated = true;
-            v->dominatedFor++;
-        }else if(!v->isDominated){
-            v->label = 2;
-            v->isDominated = true;
-            v->dominatedFor++;
-
-            for(Node* w : v->neighborhood){
-                if(!w->isDominated){
-                    w->label = 0;
-                    w->isDominated = true;
-                    w->dominatedFor++;
-
-                    for(Node* u : w->neighborhood){
-                        if(!u->isDominated){
-                            u->label = 1;
-                            u->isDominated = true;
-                            u->dominatedFor++;
-                        }
-                    }
-                }
-            }
-        }
-        Solution* f = new Solution(this->graph->getLabels(), this);
-        final.push_back(f);
+    for (int i = 0; i < populationSize; ++i) {
+        final.push_back(randomSolution());
     }
-
     return final;
 }
 
+// ok - atilio
 Solution* PRD::randomSolution(){
-    
     std::random_device rd;      // fonte de entropia
     std::mt19937 gen(rd());     // motor Mersenne Twister
     std::uniform_int_distribution<> dist(0, 2); // intervalo [0, 2]
@@ -152,6 +120,7 @@ Solution* PRD::randomSolution(){
     return new Solution(sol, this);
 }
 
+// ok - atilio
 // Auxiliary functions
 void PRD::restartGraph() {
     for(int i = 0; i < this->graph->numNodes; i++){
@@ -161,7 +130,8 @@ void PRD::restartGraph() {
     }
 }
 
-void PRD::resetGraph(std::vector<int> s){
+// ok - atilio
+void PRD::resetGraph(std::vector<int>& s){
     restartGraph(); // Set the graph as new
     for(int i = 0; i < this->graph->numNodes; i++){
         this->graph->nodes[i]->label = s[i]; // Label the vertex
@@ -181,48 +151,57 @@ void PRD::resetGraph(std::vector<int> s){
     }
 }
 
+// ok atilio
 void PRD::fixSolution(Solution* s){
     
     this->resetGraph(s->solution); // Reset the graph
+
     this->reduceWeight(s); // Call reduceWeight beforehand
     
     for(int i = 0; i < this->graph->nodes.size(); i++){
         Node* u = this->graph->nodes[i];
         if(u->label == 0) {
-            // Check if have some vertex with label = 0 that
-            // is dominated
-            bool hasSomeDominated = false;
-            for(Node* v: u->neighborhood){
-                if(v->label == 0 && v->isDominated){
-                    hasSomeDominated = true;
-                }
-            }
             // If u is dominated from unic vertex with label = 2
             // u can be keep having label = 0
             if(u->dominatedFor == 1){
                 continue;
             } 
-            // If u its not dominated and his neighbors are not dominated too
-            else if(u->dominatedFor == 0 && !hasSomeDominated){
-
-                u->label = 2;
-                u->isDominated = true;
-                u->dominatedFor++;
-
-                s->solution[i] = 2;
-
-                // Set his neighbors as dominated and increase his dominated number
-                for(Node* v: u->neighborhood){
-                    v->isDominated = true;
-                    v->dominatedFor++;
-                }
-            }else{
-                // Else, u needs to have label = 1 
+            if(u->dominatedFor >= 2) {
+                // In this case, u needs to have label = 1 
                 u->label = 1;
                 u->dominatedFor++;
                 u->isDominated = true;
-
                 s->solution[i] = 1;
+            }
+            else { // nesse caso label[u] == 0 e ele não tem nenhum vizinho com rótulo 2
+                // Check if u has some neighbor with label 0 that is dominated
+                bool hasSomeDominated = false;
+                for(Node* v: u->neighborhood){
+                    if(v->label == 0 && v->isDominated){
+                        hasSomeDominated = true;
+                    }
+                }
+                // If u its not dominated and his neighbors are not dominated too
+                // nesse momento sabemos com certeza que: u->dominatedFor == 0
+                if(!hasSomeDominated){
+                    u->label = 2;
+                    u->isDominated = true;
+                    u->dominatedFor++;
+
+                    s->solution[i] = 2;
+
+                    // Set his neighbors as dominated and increase his dominated number
+                    for(Node* v: u->neighborhood){
+                        v->isDominated = true;
+                        v->dominatedFor++;
+                    }
+                } else {
+                    // In this case, u needs to have label = 1 
+                    u->label = 1;
+                    u->dominatedFor++;
+                    u->isDominated = true;
+                    s->solution[i] = 1;
+                }
             }
         }
     }
@@ -230,6 +209,7 @@ void PRD::fixSolution(Solution* s){
    this->reduceWeight(s); // Call reduceWeight again
 }
 
+// ok atilio
 void PRD::reduceWeight(Solution* s){
 
     for(int i = 0; i < this->graph->numNodes; i++){
@@ -239,6 +219,7 @@ void PRD::reduceWeight(Solution* s){
             // Check if nodes with label = 2 
             // are dominating someone
             bool safe = true;
+
             for(Node* v: u->neighborhood){
                 if(v->label == 0 && v->dominatedFor == 1){
                     safe = false;
@@ -255,7 +236,7 @@ void PRD::reduceWeight(Solution* s){
                 // Fix his neighbors
                 for(Node* w: u->neighborhood){
                     w->dominatedFor--;
-                    if(w->label == 0 && w->dominatedFor ==0){
+                    if(w->label == 0 && w->dominatedFor == 0){
                         w->isDominated = false;
                     }
                 }
@@ -264,7 +245,7 @@ void PRD::reduceWeight(Solution* s){
     }
 
     // For every vertex with label = 1, 
-    // if he its dominated for another vertex
+    // if it is dominated by exactly one vertex 
     // with label = 2, so he can have label = 0
     for(int i = 0; i < this->graph->numNodes; i++){
         Node* v = this->graph->nodes[i];
@@ -276,8 +257,6 @@ void PRD::reduceWeight(Solution* s){
             s->solution[i] = 0;
         }
     }
-    // std::vector<int> aux = s->solution;
-    // delete s;
-    // return new Solution(aux, this);
+    
 }
 
