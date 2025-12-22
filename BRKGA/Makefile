@@ -13,7 +13,7 @@ endif
 #	full binary code optimization
 #	full error and warning reports
 #	no range checking within BRKGA:
-CFLAGS= -std=c++17 -O3 -Wextra -Wall -pedantic -Woverloaded-virtual -Wcast-align -Wpointer-arith
+CFLAGS= -std=c++17 -O3 -fopenmp -Wextra -Wall -pedantic -Woverloaded-virtual -Wcast-align -Wpointer-arith
 
 # Compiler flags for debugging; uncomment if needed:
 #	range checking enabled in the BRKGA API

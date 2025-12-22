@@ -28,7 +28,7 @@ GeneticAlgorithm::~GeneticAlgorithm(){
 
 Result GeneticAlgorithm::gaFlow() {
 
-    std::vector<Solution*> currentPop = this->population;
+    std::vector<Solution*> currentPop = this->population;  
 
     Result res = Result(
         this->g->graphName,
@@ -44,7 +44,7 @@ Result GeneticAlgorithm::gaFlow() {
     auto begin = std::chrono::high_resolution_clock::now();
 
     int gen = 0;
-    for(int i = 0; i < maxGenerations && gen < this->maxStagnant; i++){
+    for(int i = 0; i < this->maxGenerations && gen < this->maxStagnant; i++){
 
         auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(
             std::chrono::high_resolution_clock::now() - begin
@@ -66,11 +66,6 @@ Result GeneticAlgorithm::gaFlow() {
 
         // Elitism
         currentPop = GeneticAlgorithm::defaultElitism(currentPop, newPop);
-
-        if(prd->checkPRD(currentPop[0]) == false) {
-            std::cout << "------------->>>>> PROBLEMA <<<<----------------\n";
-        }
-
         if(currentPop[0]->fitness < res.fitness) {
             res.fitness = currentPop[0]->fitness;
             gen = 0;
@@ -242,9 +237,9 @@ std::vector<Solution*> GeneticAlgorithm::initializePopulation(){
     aux.push_back(this->prd->greedyInitialization());
     
     // Rest of population will be generated for randomizedSolution function
-    //for(int i = aux.size(); i < this->populationSize; i++){
-    //    aux.push_back(this->prd->randomSolution());
-    //}
+    for(int i = aux.size(); i < this->populationSize; i++){
+       aux.push_back(this->prd->randomSolution());
+    }
     return aux;
 }
 

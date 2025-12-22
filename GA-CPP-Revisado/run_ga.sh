@@ -3,10 +3,9 @@
 # Diretórios
 # A array com todos os diretórios de ENTRADA
 INPUT_DIRS=(
-    "../Graph-base/Coleta-das-Bases/Atilio-Teste"
-    #"../Graph-base/Coleta-das-Bases/DIMACS/base_final"
-    #"../Graph-base/Coleta-das-Bases/Harwell-Boeing/base_final"
-    #"../Graph-base/Coleta-das-Bases/Random_graphs/base_final"
+    "../Graph-base/Coleta-das-Bases/DIMACS/base_final"
+    "../Graph-base/Coleta-das-Bases/Harwell-Boeing/base_final"
+    "../Graph-base/Coleta-das-Bases/Random_graphs/base_final"
 )
 
 # O diretório RAIZ para todos os resultados
@@ -16,11 +15,11 @@ ROOT_OUTPUT_DIR="results/ga-cpp"
 #    .ID. stagnation generations populationFactor tournament elitism mutation trials .PARENT.
 # 47   47        200        1200                3          4     0.4      0.2      1       29
 
-POP_FACTOR=3
-STAG=200
+POP_FACTOR=5
+STAG=300
 MAX_GENS=1000
-TOURNAMENT=5
-ELIT=0.1
+TOURNAMENT=3
+ELIT=0.2
 MUT=0.2
 TRIALS=30
 

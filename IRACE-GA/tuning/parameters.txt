@@ -27,8 +27,8 @@
 
 # 1:            2:                   3:     4:      5:
 stagnation  "--stagnation " c   (200, 300, 400)
-generations "--generations " c  (800, 1000, 1200)
-populationFactor  "--populationFactor " i (2, 10)
+generations "--generations " c  (500, 700, 900, 1000, 1200)
+populationFactor  "--populationFactor " i (4, 10)
 tournament  "--tournament " i   (2, 4)
 elitism     "--elitism "    r   (0.1, 0.5)
 mutation    "--mutation "   r   (0.0, 0.9)
