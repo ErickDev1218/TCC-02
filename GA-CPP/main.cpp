@@ -2,7 +2,7 @@
 #include <fstream>
 #include <filesystem>
 
-#define IRACE 1
+#define IRACE 0
 
 namespace fs = std::filesystem;
 using namespace std;

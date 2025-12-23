@@ -34,7 +34,7 @@ Result GeneticAlgorithm::gaFlow() {
         this->g->graphName,
         this->g->numNodes, 
         this->g->numEdges,
-        static_cast<float>(2 * this->g->numNodes) / (this->g->numNodes * (this->g->numEdges - 1)),
+        static_cast<float>(2 * this->g->numEdges) / (this->g->numNodes * (this->g->numNodes - 1)),
         std::numeric_limits<int>::max(),
         0.0
     );

@@ -126,7 +126,7 @@ void Graph::deleteVertex(size_t vertex) {
 }
 
 float Graph::getDensity() const noexcept {
-    return static_cast<float>(getOrder() * 2) / (getOrder() * (getOrder() - 1)); 
+    return static_cast<float>(getSize() * 2) / (getOrder() * (getOrder() - 1)); 
 }
 
 std::unordered_set<size_t> Graph::getIsolatedVertices() const {

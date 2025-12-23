@@ -17,7 +17,7 @@ public:
 	~DecoderRoman() = default;	        
 
 	// Decode a chromosome, returning its fitness as a double-precision floating point:
-    double decode(std::vector< double >& chromosome) const;
+    double decode(const std::vector< double >& chromosome) const;
 
 private:
 	const Graph& g;
