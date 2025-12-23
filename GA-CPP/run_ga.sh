@@ -13,12 +13,12 @@ ROOT_OUTPUT_DIR="results/ga-cpp"
 
 # Description of the best-so-far configuration:
 #    .ID. stagnation generations populationFactor tournament elitism mutation trials .PARENT.
-# 47   47        200        1200                3          4     0.4      0.2      1       29
+#     7        400        1000                5          3     0.4      0.2      1       NA
 
-POP_FACTOR=3
-STAG=200
-MAX_GENS=1200
-TOURNAMENT=4
+POP_FACTOR=5
+STAG=400
+MAX_GENS=1000
+TOURNAMENT=3
 ELIT=0.4
 MUT=0.2
 TRIALS=30

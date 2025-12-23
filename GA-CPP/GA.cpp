@@ -1,7 +1,9 @@
 #include "GA.hpp"
 #include "Solution.hpp"
 
-GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int stagnant,float mutRate, float eleSize, int maxGenerations) : gen(std::random_device{}()),dis(0.1, 1.0), disInt(0, 1) {
+// ok atilio
+GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize, 
+    int stagnant,float mutRate, float eleSize, int maxGenerations) : gen(std::random_device{}()),dis(0.1, 1.0), disInt(0, 1) {
 
     this->mutationRate = mutRate;
     this->populationSize = g->numNodes / popFactor;
@@ -15,6 +17,7 @@ GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int s
     this->population = this->initializePopulation();
 }
 
+// ok atilio
 GeneticAlgorithm::~GeneticAlgorithm(){
     delete this->prd;
     for(Solution* s: population){
@@ -25,7 +28,8 @@ GeneticAlgorithm::~GeneticAlgorithm(){
 
 Result GeneticAlgorithm::gaFlow() {
 
-    std::vector<Solution*> currentPop = this->population;
+    std::vector<Solution*> currentPop = this->population;  
+
     Result res = Result(
         this->g->graphName,
         this->g->numNodes, 
@@ -40,7 +44,7 @@ Result GeneticAlgorithm::gaFlow() {
     auto begin = std::chrono::high_resolution_clock::now();
 
     int gen = 0;
-    for(int i = 0; i < maxGenerations && gen < this->maxStagnant; i++){
+    for(int i = 0; i < this->maxGenerations && gen < this->maxStagnant; i++){
 
         auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(
             std::chrono::high_resolution_clock::now() - begin
@@ -81,6 +85,7 @@ Result GeneticAlgorithm::gaFlow() {
 
 // OPERATORS
 
+// ok atilio
 // Selection
 std::vector<std::pair<Solution*, Solution*>> GeneticAlgorithm::tournamentSelection(std::vector<Solution*> population) {
     std::vector<std::pair<Solution*, Solution*>> selectedPairs;
@@ -148,6 +153,7 @@ std::vector<Solution*> GeneticAlgorithm::onePointCrossover(std::vector<std::pair
 }
 
 
+// ok atilio
 // Mutation
 void GeneticAlgorithm::randomMutation(std::vector<Solution*>& pop){
     for (Solution*& sol : pop) {
@@ -200,6 +206,7 @@ std::vector<Solution*> GeneticAlgorithm::defaultElitism(std::vector<Solution*>& 
 
 // Auxiliary functions
 
+// ok atilio
 Solution* GeneticAlgorithm::findMinimal(std::vector<Solution*>& preSelected) {
     Solution* minimal = preSelected[0];
     int indexToRemove = 0;
@@ -213,22 +220,27 @@ Solution* GeneticAlgorithm::findMinimal(std::vector<Solution*>& preSelected) {
     return minimal;
 }
 
+// ok atilio
 Solution* GeneticAlgorithm::changeSolution(Solution* element){
     Solution* aux = new Solution(element->solution, this->prd);
     delete element;
     return aux;
 }
 
+
+// ok atilio
 std::vector<Solution*> GeneticAlgorithm::initializePopulation(){
 
     // Call randomized initialization to get a half of population
-    std::vector<Solution*> aux = this->prd->randomizedInitialization(this->populationSize);
+    std::vector<Solution*> aux = this->prd->randomizedInitialization(this->populationSize - 1);
+
     // Call greedy initialization to get +1 solution, probabily the best solution in this population
     aux.push_back(this->prd->greedyInitialization());
+    
     // Rest of population will be generated for randomizedSolution function
-    for(int i = aux.size(); i < this->populationSize; i++){
-        aux.push_back(this->prd->randomSolution());
-    }
+    // for(int i = aux.size(); i < this->populationSize; i++){
+    //    aux.push_back(this->prd->randomSolution());
+    // }
     return aux;
 }
 
@@ -260,7 +272,7 @@ void GeneticAlgorithm::printVectorGA(std::vector<int> x, std::vector<int> y){
 
 void GeneticAlgorithm::printSolutions(std::vector<Solution*>& pop) {
     for(Solution * ptr : pop) {
-        std::cout << "Fitness: " << ptr->fitness << " - isValid: " << (ptr->isValid ? "Yes" : "No") << std::endl;
+        std::cout << "Fitness: " << ptr->fitness << std::endl;
         std::cout << "Solution: ";
         for(int i = 0; i < ptr->solution.size(); i++){
             std::cout << ptr->solution[i] << " ";
@@ -273,7 +285,7 @@ void GeneticAlgorithm::printSolutions(std::vector<Solution*>& pop) {
 }
 
 void GeneticAlgorithm::printSingleSolution(Solution* ptr){
-    std::cout << "Fitness: " << ptr->fitness << " - isValid: " << (ptr->isValid ? "Yes" : "No") << std::endl;
+    std::cout << "Fitness: " << ptr->fitness << std::endl;
     std::cout << "Solution: ";
     for(int i = 0; i < ptr->solution.size(); i++){
         std::cout << ptr->solution[i] << " ";

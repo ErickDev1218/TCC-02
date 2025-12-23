@@ -2,7 +2,7 @@
 #include <fstream>
 #include <filesystem>
 
-#define IRACE 0
+#define IRACE 1
 
 namespace fs = std::filesystem;
 using namespace std;
@@ -13,14 +13,14 @@ struct Parameters {
     long unsigned iraceSeed = 0;
     #endif
 
-    int maxStagnant = 350;
+    int maxStagnant = 150;
     int generations = 500;
     int tournamentSize = 5;
     int trials = 1;
-    float crossoverRate = 0.5;
+    float crossoverRate = 0.8;
     float populationFactor = 3;
     float elitismRate = 0.1;
-    float mutationRate = 0.07;
+    float mutationRate = 0.1;
     std::string file_path;
     std::string output_file = "results.csv";
 };

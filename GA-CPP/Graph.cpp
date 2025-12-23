@@ -1,7 +1,7 @@
 #include "Graph.hpp"
 #include <iostream>
 
-Graph::Graph(int numNodes,int numEdges, std::vector<std::pair<int, int>> edges, const std::string& gName) {
+Graph::Graph(int numNodes,int numEdges, std::vector<std::pair<int, int>>& edges, const std::string& gName) {
     this->numNodes = numNodes;
     this->numEdges = numEdges;
     this->nodes.reserve(numNodes);

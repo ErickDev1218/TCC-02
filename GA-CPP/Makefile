@@ -1,5 +1,11 @@
 # Compiler binary:
-CPP= g++
+UNAME_S:=$(shell uname -s)
+
+ifeq ($(UNAME_S), Darwin)
+	CXX=g++-15
+else
+	CXX=g++
+endif
 
 # Recommended compiler flags for speed:
 #	OpenMP enabled
