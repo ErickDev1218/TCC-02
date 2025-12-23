@@ -47,6 +47,7 @@ bool isFeasible(const std::vector<double>& chromosome, const Graph& graph);
 
 
 int main(int argc, char *argv[]) {
+    
 	AlgorithmParameters parameters = parse_args(argc, argv);
 
 	ensure_csv_header(parameters.output_file);
