@@ -179,6 +179,7 @@ void PRD::fixSolution(Solution* s){
                 for(Node* v: u->neighborhood){
                     if(v->label == 0 && v->isDominated){
                         hasSomeDominated = true;
+                        break;
                     }
                 }
                 // If u its not dominated and his neighbors are not dominated too

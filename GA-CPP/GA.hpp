@@ -23,7 +23,7 @@ class GeneticAlgorithm {
             Graph* g = nullptr;
             PRD* prd = nullptr;
 
-            GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int stagnant, float mutRate, float eleSize, int maxGenerations);
+            GeneticAlgorithm(Graph* g, int popFactor, int tournSize, int stagnant, float mutRate, float eliSize, int maxGenerations);
 
             ~GeneticAlgorithm();
 

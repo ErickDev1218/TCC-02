@@ -3,7 +3,7 @@
 
 // ok atilio
 GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize, 
-    int stagnant,float mutRate, float eleSize, int maxGenerations) : gen(std::random_device{}()),dis(0.1, 1.0), disInt(0, 1) {
+    int stagnant,float mutRate, float eliSize, int maxGenerations) : gen(std::random_device{}()),dis(0.1, 1.0), disInt(0, 1) {
 
     this->mutationRate = mutRate;
     this->populationSize = g->numNodes / popFactor;
