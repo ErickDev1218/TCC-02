@@ -107,9 +107,7 @@ double DecoderRoman::decode(const std::vector< double >& chromosome) const {
                 break;
             }
         }
-
         if(!hasDominatedNeighbor){
-            // PROMOÇÃO CONSTRUTIVA → cria dominador
             f[u] = 2;
             dominated[u] = true;
             dominanceNumber[u]++;

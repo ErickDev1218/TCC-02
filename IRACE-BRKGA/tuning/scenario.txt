@@ -25,7 +25,6 @@
 ## relative to current directory. If no `trainInstancesFiles` is provided, all
 ## the files in `trainInstancesDir` will be listed as instances.
 trainInstancesDir = "../../Graph-base/Coleta-das-bases/IRACE_graphs"
-# trainInstancesDir = "/mnt/c/Users/Erick\ Freitas/Desktop/8-semestre/TCC-02/Graph-base/Coleta-das-bases/IRACE_graphs"
 
 
 ## File that contains a list of training instances and optionally additional
