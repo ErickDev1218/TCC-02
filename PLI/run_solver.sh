@@ -3,8 +3,8 @@
 # Diretórios
 # A array com todos os diretórios de ENTRADA
 INPUT_DIRS=(
-    # "../Graph-base/Coleta-das-Bases/Harwell-Boeing/base_final"
-    # "../Graph-base/Coleta-das-Bases/DIMACS/base_final"
+    "../Graph-base/Coleta-das-Bases/Harwell-Boeing/base_final"
+    "../Graph-base/Coleta-das-Bases/DIMACS/base_final"
     "../Graph-base/Coleta-das-Bases/Random_graphs/base_final"
 )
 # O diretório RAIZ para todos os resultados

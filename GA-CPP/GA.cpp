@@ -7,7 +7,7 @@ GeneticAlgorithm::GeneticAlgorithm(Graph* g, int popFactor, int tournSize,
 
     this->mutationRate = mutRate;
     this->populationSize = g->numNodes / popFactor;
-    this->elitismSize = static_cast<std::size_t>(std::floor(this->populationSize * eleSize));
+    this->elitismSize = static_cast<std::size_t>(std::floor(this->populationSize * eliSize));
     this->maxGenerations = maxGenerations;
     this->maxStagnant = stagnant;
     this->tournamentSize = tournSize;
