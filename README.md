@@ -9,6 +9,6 @@ Orientador: Prof. Dr. Atílio Gomes Luiz.
 
 Banca: Profs. Drs. Paulo Henrique Macêdo de Araújo, Lucas Ismailly Bezerra Freitas e Dr. Natanael Ramos.
 
-Obrigado à todos pelo apoio de sempre!
+Obrigado à todos pelo apoio de sempre!!!
 
 

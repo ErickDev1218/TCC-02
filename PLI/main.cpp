@@ -35,29 +35,6 @@ void solvePRD(const Graph& G, Result& res);
 
 
 int main(int argc, char *argv[]) {
-    // Exemplo de Grafo Simples: V={1, 2, 3}, E={(1,2), (2,3)}
-    // Graph G_example = {
-    //     {0, {1,6,9,5}},
-    //     {1, {0, 2}},
-    //     {2, {1, 3}},
-    //     {3, {2, 4, 8}},
-    //     {4, {3, 5, 7}},
-    //     {5, {4, 0, 7}},
-    //     {6, {0, 8, 7}},
-    //     {7, {4, 5, 6, 8}},
-    //     {8, {3, 6, 7}},
-    //     {9, {0}},
-    // };
-    //a 0
-    //b 1
-    //c 2
-    //d 3
-    //e 4
-    //f 5
-    //g 6
-    //h 7 
-    //i 8
-    //j 9
 
     Parameters params = parse_args(argc, argv);
     ensure_csv_header(params.output_file);
@@ -129,16 +106,6 @@ void readGraphAndSolve(const std::string& path, const std::string& output) {
     }
 
     file.close();
-    
-    // Mostra o grafo
-    // for (const auto& [v, adj] : g) {
-    //     std::cout << v << ": ";
-    //     for (int neighbor : adj) {
-    //         std::cout << neighbor << " ";
-    //     }
-    //     std::cout << "\n";
-    
-    // }
     solvePRD(g, res);
 
     write_result_to_csv(output, res);
@@ -146,16 +113,13 @@ void readGraphAndSolve(const std::string& path, const std::string& output) {
 
 void solvePRD(const Graph& G, Result& res) {
     try {
-        // 1. Configurar o Ambiente e o Modelo
         GRBEnv env = GRBEnv(true);
-        // env.set("LogFile", "optimization_log.log");
         env.start();
 
         GRBModel model = GRBModel(env);
         model.getEnv().set(GRB_IntParam_OutputFlag, 0);
         model.set(GRB_StringAttr_ModelName, "PLI_Sem_Linearizacao");
 
-        // Obter o conjunto de vértices
         std::vector<Vertex> V;
         for (const auto& pair : G) {
             V.push_back(pair.first);
@@ -206,31 +170,6 @@ void solvePRD(const Graph& G, Result& res) {
                    }
                 }
             }
-
-            // Passo B: Calcular o produto das duas variáveis binárias: (1 - x_v)*(1 - y_v)
-            // O Gurobi aceita o produto de variáveis GRBVar * GRBVar, resultando em GRBQuadExpr
-            // GRBQuadExpr product_xy = (1 - x_vars[v]) * (1 - y_vars[v]);
-
-            // Passo C: Calcular o produto do termo quadrático pelo termo linear
-            // OBS: O Gurobi C++ não permite a multiplicação direta de GRBQuadExpr * GRBLinExpr
-            // para um MIQP simples, pois resultaria em um termo cúbico (MINLP).
-            
-            // Para manter o MIQP/MINLP resolvível pelo Gurobi, *devemos* usar a função 
-            // GRBModel::addGenConstrIndicator() ou GRBModel::addGenConstrMultiVar().
-            // Alternativamente, se (1 - x_v)*(1 - y_v) é 0 ou 1, e o Gurobi aceita a 
-            // multiplicação por um termo linear (que é o caso no Gurobi moderno, usando 
-            // o recurso General Constraint para termos MINLP), a sintaxe abaixo funciona.
-            // Para MIQP (restrição quadrática): O Gurobi converterá internamente a restrição
-            // não-linear em termos que ele consiga processar, seja via MIQP ou MINLP (se ativo).
-            
-            // Para forçar o Gurobi a aceitar esta construção como MINLP:
-            // O Gurobi consegue lidar com termos cúbicos ou de grau superior quando 
-            // *apenas variáveis binárias* estão sendo multiplicadas, ou quando a 
-            // opção NonConvex está definida.
-            
-            // Vamos usar a sintaxe direta e confiar na capacidade de MINLP do Gurobi:
-            // É importante setar o parâmetro NonConvex para 2, para que o Gurobi aceite 
-            // a multiplicação de um termo quadrático por um linear (que gera um termo cúbico).
             model.set(GRB_IntParam_NonConvex, 2);
             
             // Termo Completo (Cúbico): (1 - x_v)*(1 - y_v) * sum_{u in N(v)} 2*y_u

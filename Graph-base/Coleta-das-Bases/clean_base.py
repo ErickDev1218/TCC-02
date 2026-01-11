@@ -3,7 +3,7 @@ import csv
 import pandas as pd
 import numpy as np
 
-# pasta onde estão os arquivos .txt
+# pasta onde estão os arquivos .txt.
 # input_folder = "/Users/erickdev1218/Desktop/Repositorios/TCC-02/Graph-base/Coleta-das-Bases/DIMACS/base_final"
 
 input_folder = "/Users/erickdev1218/Desktop/Repositorios/TCC-02/Graph-base/Coleta-das-Bases/Harwell-Boeing/base_final"

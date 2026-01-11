@@ -6,7 +6,7 @@
  * realizando algumas trocas válidas:
  * - se uv in E(G) e f(u)=2 e f(v)=1, então redefinimos o peso de v como f(v)=0.
  * - se u tem degree(u)>=2 e f(u)=1 e u tem pelo menos 2 vizinhos w com f(w)=1, então redefinimos 
- *   o peso de u como f(u)=2 e os seus vizinhos com rótulo 1 recebem rótulo 0.
+ *   o peso de u como f(u)=2 e os seus vizinhos com rótulo 1 recebem rótulo 0..
  */
 void reduce_weight_heuristic(const Graph& graph, std::vector<int>& label, std::vector<int>& dominanceNumber) {
     const int n = graph.getOrder();

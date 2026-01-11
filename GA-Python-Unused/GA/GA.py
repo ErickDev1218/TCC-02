@@ -18,7 +18,7 @@ class GA:
 
     def config_ga(self, config):
 
-        #### SELECTION ####
+        #### SELECTION #####
         if config[0] == "tournament":
             selection = self.__tournament_selection
         elif config[0] == "roullette":
